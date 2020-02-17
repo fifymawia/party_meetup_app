@@ -1,4 +1,5 @@
 const Group = require('./model');
+const { Meetup } = require('../meetups');
 
 const createGroup = async (req, res) => {
   const {
@@ -57,11 +58,31 @@ const createGroupMeetup = async (req, res) => {
   }
   // eslint-disable-next-line no-empty
   try {
-    const [meetup, group] = await Group.addMeetup(groupId, { title, description });
+    const { meetup, group } = await Group.addMeetup(groupId, { title, description });
     return res.status(201).json({ error: false, meetup, group });
   } catch (e) {
     return res.status(400).json({ error: true, message: 'Meetup cannot be created' });
   }
 };
-module.exports = { createGroupMeetup, createGroup };
+
+const getGroupMeetups = async (req, res) => {
+  const { groupId } = req.params;
+  if (!groupId) {
+    return res.status(400).json({ error: true, message: 'You need to provide the group id' });
+  }
+  // search to see if group exists
+  const group = await Group.findById(groupId);
+  if (!group) {
+    return res.status(400).json({ error: true, message: 'This group does not exist' });
+  }
+  // eslint-disable-next-line no-empty
+  try {
+    return res.status(200).json({
+      error: false,
+      meetups: await Meetup.find({ group: groupId }).populate('group', 'name') });
+  } catch (e) {
+    return res.status(400).json({ error: true, message: 'Cannot fetch meetup' });
+  }
+};
+module.exports = { createGroupMeetup, createGroup, getGroupMeetups };
 // module.exports = { createGroup };

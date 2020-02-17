@@ -23,17 +23,26 @@ const GroupSchema = new Schema({
   }],
 }, { timestamps: true }
 );
+/** *
+ * create a financial meetup/contribution purpose and add it to the meetup array in the group */
 GroupSchema.statics.addMeetup = async function (id, args) {
   const Meetup = mongoose.model('Meetup');
-  
-  const group = await this.findById(id);
+  // add group id to the meetup  group element
+  // the author of the meetup
 
-  const meetup = await new Meetup({ ...args, group });
+  const meetup = await new Meetup({ ...args, group: id });
+  // find group with the id provided in the url
+  // push the meetup id in the meetups element
+  const group = await this.findByIdAndUpdate(id, { $push: { meetups: meetup.id } });
 
-  group.meetups.push(meetup);
+  // group.meetups.push(meetup);
 
-  const result = await Promise.all([meetup.save(), group.save()]);
-  return result;
+  // const result = await Promise.all([meetup.save(), group.save()]);
+  // return result;
+  return {
+    meetup: await meetup.save(),
+    group,
+  };
 };
 module.exports = (mongoose.model('Group', GroupSchema));
 
