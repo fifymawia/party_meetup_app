@@ -1,3 +1,6 @@
-//export * from './meetups';
+// export * from './meetups';
 const meetups = require('./meetups');
-module.exports = { meetups };
+
+const groups = require('./groups');
+
+module.exports = { ...meetups, ...groups };

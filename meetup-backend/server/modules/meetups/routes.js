@@ -6,5 +6,4 @@ const routes = new Router();
 routes.post('/meetups', MeetupController.createMeetup);
 routes.get('/meetups', MeetupController.getAllMeetups);
 
-
 module.exports = routes;

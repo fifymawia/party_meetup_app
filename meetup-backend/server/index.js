@@ -1,35 +1,40 @@
-//import express
-const express = require("express");
-//import database
-const dbConfig = require ('./config/db');
-//import middlewares
-const middlewaresConfig = require ('./config/middlewares');
-//import the routes
-const  MeetupRoutes = require('./modules/meetups/routes');
- //creates the app
+// import express
+const express = require('express');
+// import middlewares
+const middlewaresConfig = require('./config/middlewares');
+// import the routes
+const { GroupRoutes, MeetupRoutes } = require('./modules');
+
+// import database
+const dbConfig = require('./config/db');
+// creates the app
 const app = express();
 
 /**
  * Database
  * **/
+// eslint-disable-next-line no-unused-expressions
 dbConfig;
 
 /**
  * middlewares
  * **/
 middlewaresConfig(app);
-//routes
-app.use('/api', [MeetupRoutes]);
+// routes
 
+app.use('/api', [GroupRoutes, MeetupRoutes]);
 
-//creates/selects a port
-const PORT = process.env.PORT || 3000; 
+// creates/selects a port
+const PORT = process.env.PORT || 3000;
 
-//Listens to port
+// Listens to port
 app.listen(PORT, err => {
-    if (err) {
-        console.error(err);
-    }{
-        console.log(`App listens to port: ${PORT}`);
-    }
+  if (err) {
+    // eslint-disable-next-line no-console
+    console.error(err);
+    // eslint-disable-next-line no-lone-blocks
+  } else {
+    // eslint-disable-next-line no-console
+    console.log(`App listens to port: ${PORT}`);
+  }
 });
