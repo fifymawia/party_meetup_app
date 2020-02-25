@@ -31,7 +31,7 @@ const styles = EStyleSheet.create({
   },
   contributionCardTitle: {
     position: 'absolute',
-    color: '$white',
+    color: '$whiteColor',
     top: '2%',
     left: '2.5%',
   },

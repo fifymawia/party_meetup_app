@@ -13,7 +13,7 @@ class HomeScreen extends Component {
   }
     state = {
       loading: false,
-      contributionApi: [],
+      contributions: [],
     }
     async componentDidMount() {
       this.setState({ loading: true });
