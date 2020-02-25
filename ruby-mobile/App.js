@@ -1,10 +1,12 @@
 import React from 'react';
 import { ActivityIndicator } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
 import * as Font from 'expo-font';
 // import { Text } from 'react-native';
 import EStylesheet from 'react-native-extended-stylesheet';
 import Colors from './constants/Colors';
-import { HomeScreen } from './src/screens';
+import Root from './src/Routes';
+// import { HomeScreen } from './src/screens';
 // import { cachedFonts } from './helpers';
 
 // import colors
@@ -33,7 +35,9 @@ export default class App extends React.Component {
         return <ActivityIndicator />;
       }
       return (
-        <HomeScreen />
+        <NavigationContainer>
+          <Root />
+        </NavigationContainer>
       );
     }
 }

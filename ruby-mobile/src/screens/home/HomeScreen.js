@@ -18,8 +18,8 @@ class HomeScreen extends Component {
     async componentDidMount() {
       this.setState({ loading: true });
       const contributions = await this.props.contributionApi.fetchGroupContributions();
-      // this.setState({ loading: false,contributions });
-      setTimeout(() => this.setState({ loading: false, contributions }), 2000);
+      this.setState({ loading: false,contributions });
+    //   setTimeout(() => this.setState({ loading: false, contributions }), 2000);
     }
     render() {
       if (this.state.loading) {
