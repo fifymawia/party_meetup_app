@@ -1,5 +1,8 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeScreen, NotificationsScreen } from '../screens';
+import { HomeScreen, 
+    NotificationsScreen,
+    createGroupScreen,
+ } from '../screens';
 
 // export default createBottomTabNavigator({
 //   Home: {
@@ -12,6 +15,9 @@ const Tab = createBottomTabNavigator({
   },
   Notifications: {
     screen: NotificationsScreen,
+  },
+  Groups: {
+      screen: createGroupScreen,
   },
 });
 export default Tab;

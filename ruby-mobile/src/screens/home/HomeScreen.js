@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Alert } from 'react-native';
 import { MyContributionsList } from './components';
 import { ContributionApi } from '../../../constants/api';
 import styles from './styles/HomeScreen';
 import { LoadingScreen } from '../../commons';
+import { Button } from 'native-base';
 
 const contributionApi = new ContributionApi();
 
+
 class HomeScreen extends Component {
+    
   static defaultProps = {
     contributionApi,
   }
@@ -27,10 +30,27 @@ class HomeScreen extends Component {
           <LoadingScreen />
         );
       }
+     
       return (
         <View style={styles.root}>
           <View style={styles.topContainer}>
             <Text>HomeScreen</Text>
+          </View>
+          <View>
+              
+              <Button block light style={{ marginBottom: 5 }} 
+               // onPress={() => navigation.navigate('createGroupScreen')}
+              onPress={() => Alert.alert('Are you sure you want to create an account?')}
+              >
+                  <Text>Create New Group</Text>
+              </Button>
+          </View>
+          <View>
+              <Button block light 
+             onPress={() => Alert.alert('This is a list of your groups')}
+             >
+                  <Text>My Groups</Text>
+              </Button>
           </View>
 
           <View style={styles.bottomContainer}>

@@ -2,6 +2,7 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 // import HomeNavigator from './HomeNavigator';
 import { HomeScreen, NotificationsScreen } from '../screens';
+import { createGroupScreen } from '../screens/createGroupScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -18,6 +19,10 @@ export default function TabNavigator() {
       <Tab.Screen
         name="Notifications"
         component={NotificationsScreen}
+      />
+       <Tab.Screen
+        name="CreateGroup"
+        component={createGroupScreen}
       />
     </Tab.Navigator>
   );
