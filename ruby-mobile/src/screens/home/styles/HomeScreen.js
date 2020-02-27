@@ -14,6 +14,7 @@ const styles = EStyleSheet.create({
   },
   bottomContainer: {
     flex: 1,
+    marginTop: 30,
     // backgroundColor: '$blackBlueColor',
 
   },
