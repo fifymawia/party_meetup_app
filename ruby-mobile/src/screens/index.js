@@ -3,3 +3,4 @@
 export * from './home';
 export * from './notifications';
 export * from './createGroupScreen';
+export * from './addMembersScreen';

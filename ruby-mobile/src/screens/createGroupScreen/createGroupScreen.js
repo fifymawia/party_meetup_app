@@ -17,9 +17,9 @@ class createGroupScreen extends Component {
         };
         
       }
-      onValueChange2(value: string) {
+      onValueChange2(value) {
         this.setState({
-          selected2: valu
+          selected2: value
         });
       }
       FunctionToOpenMembersActivity = () =>
