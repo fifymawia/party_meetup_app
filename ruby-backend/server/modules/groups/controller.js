@@ -6,6 +6,9 @@ const createGroup = async (req, res) => {
     name,
     description,
     bankAccount,
+    cyclePeriod,
+    amount,
+    proposedDate
     // category
   } = req.body;
   // name authentication

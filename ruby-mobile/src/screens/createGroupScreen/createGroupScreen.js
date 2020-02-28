@@ -13,6 +13,9 @@ class createGroupScreen extends Component {
         name: '',
         description: '',
         bankAccount: '',
+        frequency: '',
+        amount: '',
+        proposedDate: '',
        
     }
 
@@ -37,7 +40,7 @@ class createGroupScreen extends Component {
       }
     
       _checkIfButtonNextDisabled(){
-          const { name, description, bankAccount } = this.state;
+          const { name, description, bankAccount, frequency, amount, proposedDate } = this.state;
 
          // if( name.length >5 && description.length > 10 && bankAccount.length > 1()){
         //      return false;
@@ -58,7 +61,7 @@ class createGroupScreen extends Component {
     render() {
         return (
             <View>
-               <View style={{marginTop: 30, alignItems: 'center' }}>
+               <View style={{marginTop: 10, alignItems: 'center' }}>
                 <Text style={{fontSize: 30}}>Group Setup Info
                 </Text>
                 </View>
@@ -66,14 +69,17 @@ class createGroupScreen extends Component {
               
                  <Form>
                    <Item>
-                     <Input placeholder="Enter Group Name" value={this.state.name} />
+                     <Input placeholder=" Group Name" value={this.state.name} />
 
                    </Item>
-                   <Item last>
+                   <Item >
                      <Input placeholder="Group Description" value={this.state.description} />
                    </Item>
+                   <Item last>
+                     <Input placeholder="Group Account Number" value={this.state.bankAccount} />
+                   </Item>
                    <View>
-                <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20 }}>Select Contribution Cycle Period
+                <Text style={{ marginTop: 10, marginLeft: 60, fontSize: 20 }}>Select Contribution Frequency
                 </Text>
                 </View>
                    <Item picker>
@@ -84,7 +90,7 @@ class createGroupScreen extends Component {
                 placeholderStyle={{ color: "#bfc6ea" }}
                 placeholderIconColor="#007aff"
                 selectedValue={this.state.selected2}
-                style={{ marginTop: 15 }}
+                style={{ marginTop: 10 }}
                 onValueChange={this.onValueChange2.bind(this)}
               >
                 <Picker.Item label="Daily" value="key0" />
@@ -94,7 +100,7 @@ class createGroupScreen extends Component {
               </Picker>
             </Item>
             <Item style={{ marginTop: 15 }}>
-                     <Input placeholder="Enter bankAccount/amount Per Contribution"  value={this.state.bankAccount}/>
+                     <Input placeholder="Amount Per Contribution"  value={this.state.amount}/>
                    </Item>
                    <View>
                 <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20 }}>Select Proposed Start Date
@@ -129,7 +135,7 @@ class createGroupScreen extends Component {
 
             <View>
               <Button block danger
-              style={{ marginTop: 70}}
+              style={{ marginTop: 50}}
               disabled = {this._checkIfButtonNextDisabled()}
               onPress = {this.FunctionToOpenMembersActivity}
               >
