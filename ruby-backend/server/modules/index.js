@@ -3,4 +3,6 @@ const contributions = require('./contributions');
 
 const groups = require('./groups');
 
-module.exports = { ...contributions, ...groups };
+const members = require('./members');
+
+module.exports = { ...contributions, ...groups, ...members };

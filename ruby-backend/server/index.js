@@ -3,7 +3,7 @@ const express = require('express');
 // import middlewares
 const middlewaresConfig = require('./config/middlewares');
 // import the routes
-const { GroupRoutes, ContributionRoutes } = require('./modules');
+const { GroupRoutes, ContributionRoutes, MemberRoutes } = require('./modules');
 
 // import database
 const dbConfig = require('./config/db');
@@ -22,7 +22,7 @@ dbConfig;
 middlewaresConfig(app);
 // routes
 
-app.use('/api', [GroupRoutes, ContributionRoutes]);
+app.use('/api', [GroupRoutes, ContributionRoutes, MemberRoutes]);
 
 // creates/selects a port
 const PORT = process.env.PORT || 3000;
