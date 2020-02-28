@@ -88,6 +88,7 @@ const createGroup = async (req, res) => {
 const createGroupContribution = async (req, res) => {
   const { title,
     description,
+    members,
   } = req.body;
   const { groupId } = req.params;
   if (!title) {
@@ -104,15 +105,29 @@ const createGroupContribution = async (req, res) => {
   } else if (description.length < 10) {
     return res.status(400).json({ error: true, message: 'Description must be atleast 10 characters' });
   }
+  if (!members) {
+    return res.status(400).json({ error: true, message: 'Members must be provided' });
+  } else if (typeof members !== 'object') {
+    return res.status(400).json({ error: true, message: 'Members must be an array' });
+  } else if (members.length < 2) {
+    return res.status(400).json({ error: true, message: 'Members must be at least 2' });
+  }
   if (!groupId) {
     return res.status(400).json({ error: true, message: 'GroupId must be provided' });
   }
   // eslint-disable-next-line no-empty
+  const { members: groupMembers } = await Group.findById(groupId);
+  const conMembers = members.filter(member => !groupMembers.includes(member));
+
+  if (conMembers.length > 0) {
+    return res.status(400).json({ error: true, message: 'There are con members', conMembers });
+  }
+
   try {
-    const { contribution, group } = await Group.addContribution(groupId, { title, description });
+    const { contribution, group } = await Group.addContribution(groupId, { title, description, members });
     return res.status(201).json({ error: false, contribution, group });
   } catch (e) {
-    return res.status(400).json({ error: true, message: 'Contribution cannot be created' });
+    return res.status(400).json({ error: true, message: e.message });
   }
 };
 

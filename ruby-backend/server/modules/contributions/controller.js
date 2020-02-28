@@ -1,16 +1,23 @@
 const Contribution = require('./model');
+// const Group = require('../groups/model');
 const { Member } = require('../members');
 
-const createContribution = async (req, res) => {
-  const { title, description, member } = req.body;
-  const newContribution = new Contribution({ title, description, member });
+// const createContribution = async (req, res) => {
+//   // const { title, description, members } = req.body;
+//   const { groupId } = req.params;
 
-  try {
-    return res.status(201).json({ contribution: await newContribution.save() });
-  } catch (e) {
-    return res.status(e.status).json({ error: true, message: 'Error With Contribution' });
-  }
-};
+//   const group = Group.findById(groupId);
+//   console.log(group);
+
+//   // const newContribution = new Contribution({ title, description, members });
+  
+//   try {
+//     // return res.status(201).json({ contribution: await newContribution.save() });
+//     return res.status(201).json({ msg: 'Yeah' });
+//   } catch (e) {
+//     return res.status(e.status).json({ error: true, message: 'Error With Contribution' });
+//   }
+// };
 
 const getAllContributions = async (req, res) => {
   try {
@@ -20,37 +27,37 @@ const getAllContributions = async (req, res) => {
   }
 };
 
-// members array in a contribution
-const createContributionMembers = async (req, res) => {
-  const { name,
-    phoneNumber,
-  } = req.body;
-  const { contributionId } = req.params;
-  if (!name) {
-    return res.status(400).json({ error: true, message: 'Name must be provided' });
-  } else if (typeof name !== 'string') {
-    return res.status(400).json({ error: true, message: 'Name must be a String' });
-  } else if (name.length < 5) {
-    return res.status(400).json({ error: true, message: 'Name must be atleast 5 characters' });
-  }
-  if (!phoneNumber) {
-    return res.status(400).json({ error: true, message: 'PhoneNumber must be provided' });
-  } else if (typeof phoneNumber !== 'string') {
-    return res.status(400).json({ error: true, message: 'PhoneNumber must be a String' });
-  } else if (phoneNumber.length < 10) {
-    return res.status(400).json({ error: true, message: 'PhoneNumber must be atleast 10 characters' });
-  }
-  if (!contributionId) {
-    return res.status(400).json({ error: true, message: 'ContributionId must be provided' });
-  }
-  // eslint-disable-next-line no-empty
-  try {
-    const { member, contribution } = await Contribution.addMember(contributionId, { name, phoneNumber });
-    return res.status(201).json({ error: false, member, contribution });
-  } catch (e) {
-    return res.status(400).json({ error: true, message: 'Member cannot be created' });
-  }
-};
+// // members array in a contribution
+// const createContributionMembers = async (req, res) => {
+//   const { name,
+//     phoneNumber,
+//   } = req.body;
+//   const { contributionId } = req.params;
+//   if (!name) {
+//     return res.status(400).json({ error: true, message: 'Name must be provided' });
+//   } else if (typeof name !== 'string') {
+//     return res.status(400).json({ error: true, message: 'Name must be a String' });
+//   } else if (name.length < 5) {
+//     return res.status(400).json({ error: true, message: 'Name must be atleast 5 characters' });
+//   }
+//   if (!phoneNumber) {
+//     return res.status(400).json({ error: true, message: 'PhoneNumber must be provided' });
+//   } else if (typeof phoneNumber !== 'string') {
+//     return res.status(400).json({ error: true, message: 'PhoneNumber must be a String' });
+//   } else if (phoneNumber.length < 10) {
+//     return res.status(400).json({ error: true, message: 'PhoneNumber must be atleast 10 characters' });
+//   }
+//   if (!contributionId) {
+//     return res.status(400).json({ error: true, message: 'ContributionId must be provided' });
+//   }
+//   // eslint-disable-next-line no-empty
+//   try {
+//     const { member, contribution } = await Contribution.addMember(contributionId, { name, phoneNumber });
+//     return res.status(201).json({ error: false, member, contribution });
+//   } catch (e) {
+//     return res.status(400).json({ error: true, message: 'Member cannot be created' });
+//   }
+// };
 
 const getContributionMembers = async (req, res) => {
   const { contributionId } = req.params;
@@ -73,7 +80,7 @@ const getContributionMembers = async (req, res) => {
 };
 
 module.exports = { getAllContributions,
-  createContribution, 
-  createContributionMembers, 
+  // createContribution, 
+  //  createContributionMembers, 
   getContributionMembers, 
 };
