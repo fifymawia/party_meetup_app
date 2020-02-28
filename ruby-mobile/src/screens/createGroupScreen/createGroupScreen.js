@@ -2,11 +2,19 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Form, Item, Input, Picker, Button } from 'native-base';
 import DatePicker from 'react-native-datepicker';
+import { GroupApi } from '../../../constants/groupApi';
 
 
 //import { FormLabel, FormInput } from 'react-native-elements';
+const groupApi = new GroupApi();
 
 class createGroupScreen extends Component {
+    state = {
+        name: '',
+        description: '',
+        bankAccount: '',
+       
+    }
 
     constructor(props) {
         super(props);
@@ -28,6 +36,24 @@ class createGroupScreen extends Component {
          
       }
     
+      _checkIfButtonNextDisabled(){
+          const { name, description, bankAccount } = this.state;
+
+         // if( name.length >5 && description.length > 10 && bankAccount.length > 1()){
+        //      return false;
+    //       }
+    //       return true;
+    //   }
+    //   _createGroup = async () => {
+    //       const { name, description, bankAccount } = this.state;
+    //       const res = await groupApi.createGroup({
+    //           name,
+    //           description,
+    //           bankAccount
+    //       });
+    //       console.log(res);
+    //   } 
+}
      
     render() {
         return (
@@ -40,11 +66,16 @@ class createGroupScreen extends Component {
               
                  <Form>
                    <Item>
-                     <Input placeholder="Enter Group Name" />
+                     <Input placeholder="Enter Group Name" value={this.state.name} />
+
                    </Item>
                    <Item last>
-                     <Input placeholder="Group Description" />
+                     <Input placeholder="Group Description" value={this.state.description} />
                    </Item>
+                   <View>
+                <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20 }}>Select Contribution Cycle Period
+                </Text>
+                </View>
                    <Item picker>
               <Picker
                 mode="dropdown"
@@ -63,7 +94,7 @@ class createGroupScreen extends Component {
               </Picker>
             </Item>
             <Item style={{ marginTop: 15 }}>
-                     <Input placeholder="Enter Amount Per Contribution" />
+                     <Input placeholder="Enter bankAccount/amount Per Contribution"  value={this.state.bankAccount}/>
                    </Item>
                    <View>
                 <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20 }}>Select Proposed Start Date
@@ -99,7 +130,8 @@ class createGroupScreen extends Component {
             <View>
               <Button block danger
               style={{ marginTop: 70}}
-              onPress = { this.FunctionToOpenMembersActivity }
+              disabled = {this._checkIfButtonNextDisabled()}
+              onPress = {this.FunctionToOpenMembersActivity}
               >
                   <Text>Next</Text>
               </Button>
@@ -112,5 +144,5 @@ class createGroupScreen extends Component {
         );
         }
 
-}
+    }
 export default createGroupScreen;

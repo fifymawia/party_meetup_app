@@ -8,7 +8,7 @@
 //     });
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://129f95f8.ngrok.io/api';
+axios.defaults.baseURL = 'https://32eb22a7.ngrok.io/api';
 const fakeGroupId = '5e53e62cba0b532c2c524f5d';
 
 
