@@ -1,0 +1,36 @@
+// user schema
+
+const mongoose = require('mongoose');
+
+const UserSchema = mongoose.Schema({
+  firstName: {
+    type: String,
+    required: true,
+    minlength: [3, 'First Name must be atleast 3 characters'],
+  },
+  lastName: {
+    type: String,
+    required: true,
+    minlength: [3, 'Last Name must be atleast 3 characters'],
+  },
+  email: {
+    
+    type: String,
+
+  },
+  phoneNumber: {
+    type: String,
+    required: true,
+    unique: true,
+    minlength: [10, 'Phone Number must be atleast 10 characters'],
+  },
+  password: {
+    type: String,
+    required: true,
+    minlength: [6, 'Password must be atleast 6 characters'],
+  } },
+{ timestamps: true,
+});
+
+// export model user with UserSchema
+module.exports = mongoose.model('user', UserSchema);
