@@ -14,7 +14,7 @@ const UserSchema = mongoose.Schema({
     minlength: [3, 'Last Name must be atleast 3 characters'],
   },
   email: {
-    
+
     type: String,
 
   },
@@ -31,6 +31,11 @@ const UserSchema = mongoose.Schema({
   } },
 { timestamps: true,
 });
+
+UserSchema.statics.addGroup = async function (args) {
+  const Group = mongoose.model('Group');
+  return Group.create(args);
+};
 
 // export model user with UserSchema
 module.exports = mongoose.model('user', UserSchema);

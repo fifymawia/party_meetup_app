@@ -3,7 +3,7 @@ const GroupController = require('./controller');
 
 const routes = new Router();
 // group
-routes.post('/groups/new', GroupController.createGroup);
+routes.post('/users/:userId/groups/new', GroupController.createGroup);
 // contribution by group
 routes.post('/groups/:groupId/contributions/new', GroupController.createGroupContribution);
 routes.get('/groups/:groupId/contributions', GroupController.getGroupContributions);

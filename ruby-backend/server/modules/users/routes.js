@@ -5,7 +5,10 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+// const UsersController = require('./controller');
+
 const router = express.Router();
+// const routes = new router();
 
 const User = require('./model');
 
@@ -174,4 +177,7 @@ router.get('/me', async (req, res) => {
     res.send({ message: 'Error in Fetching user' });
   }
 });
+// routes.post('/groups/:groupId/contributions/new', UsersController.createGroupContribution);
+// routes.get('/groups/:groupId/contributions', UsersController.getGroupContributions);
+
 module.exports = router;

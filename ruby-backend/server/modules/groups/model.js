@@ -45,6 +45,11 @@ const GroupSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Contribution',
   }],
+  // admin
+  admin: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  },
   members: [{
     type: Schema.Types.ObjectId,
     ref: 'Member',
@@ -91,7 +96,7 @@ GroupSchema.statics.addMember = async function (id, args) {
   // return result;
   return {
     member: await member.save(),
-    group,
+    group: await group.save(),
   };
 };
 module.exports = (mongoose.model('Group', GroupSchema));

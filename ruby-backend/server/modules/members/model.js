@@ -13,6 +13,11 @@ const MemberSchema = new Schema({
     required: true,
     minlength: [10, 'Phone Number must be atleast 10 characters'],
   },
+  userId: {
+    type: Schema.Types.ObjectId,
+    required: true,
+    ref: 'User',
+  },
   group: {
     type: Schema.Types.ObjectId,
     ref: 'Group',

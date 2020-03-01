@@ -1,6 +1,7 @@
 const Group = require('./model');
 const { Contribution } = require('../contributions');
 const { Member } = require('../members');
+const { User } = require('../users');
 
 const createGroup = async (req, res) => {
   const {
@@ -12,6 +13,7 @@ const createGroup = async (req, res) => {
     proposedDate,
     // category
   } = req.body;
+  const { userId } = req.params;
   // name authentication
   if (!name) {
     return res.status(400).json({ error: true, message: 'Name must be provided' });
@@ -75,13 +77,34 @@ const createGroup = async (req, res) => {
   } else if (proposedDate.length < 5) {
     return res.status(400).json({ error: true, message: 'ProposedDate must be atleast 5 characters' });
   }
+  if (!userId) {
+    return res.status(400).json({ error: true, message: 'User Id must be provided' });
+  }
 
-  const group = new Group({ name, description, bankAccount, frequency, amount, proposedDate });
   try {
-    return res.status(201).json({ error: false, group: await group.save() });
+    // Check if Admin Exists as a user
+    const admin = await User.findById(userId);
+    if (!admin) {
+      return res.status(400).json({ error: true, message: 'Admin does not exist as a user' });
+    }
+    // Create Group
+
+    const group = await User.addGroup({ name, description, bankAccount, frequency, amount, proposedDate, admin: userId });
+    // console.log(group, admin);
+
+    // Add Admin to the Group
+    const result = await Group.addMember(group._id, {
+      name: `${admin.firstName} ${admin.lastName}`,
+      phoneNumber: admin.phoneNumber,
+      userId: admin._id,
+    });
+    return res.status(201).json({ error: false, result });
   } catch (e) {
     return res.status(400).json({ error: true, message: e.message });
   }
+
+  // eslint-disable-next-line no-empty
+  // user must be in our db
 };
 // add contribution array to group
 
