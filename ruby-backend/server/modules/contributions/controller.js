@@ -1,6 +1,75 @@
 const Contribution = require('./model');
-// const Group = require('../groups/model');
+const Group = require('../groups/model');
 const { Member } = require('../members');
+
+// add contribution array to group
+
+const createGroupContribution = async (req, res) => {
+  const { title,
+    description,
+    members,
+    groupId,
+  } = req.body;
+  // const { groupId } = req.params;
+  if (!title) {
+    return res.status(400).json({ error: true, message: 'Title must be provided' });
+  } else if (typeof title !== 'string') {
+    return res.status(400).json({ error: true, message: 'Title must be a String' });
+  } else if (title.length < 5) {
+    return res.status(400).json({ error: true, message: 'Title must be atleast 5 characters' });
+  }
+  if (!description) {
+    return res.status(400).json({ error: true, message: 'Description must be provided' });
+  } else if (typeof description !== 'string') {
+    return res.status(400).json({ error: true, message: 'Description must be a String' });
+  } else if (description.length < 10) {
+    return res.status(400).json({ error: true, message: 'Description must be atleast 10 characters' });
+  }
+  if (!members) {
+    return res.status(400).json({ error: true, message: 'Members must be provided' });
+  } else if (typeof members !== 'object') {
+    return res.status(400).json({ error: true, message: 'Members must be an array' });
+  } else if (members.length < 2) {
+    return res.status(400).json({ error: true, message: 'Members must be at least 2' });
+  }
+  if (!groupId) {
+    return res.status(400).json({ error: true, message: 'GroupId must be provided' });
+  }
+  // eslint-disable-next-line no-empty
+  const { members: groupMembers } = await Group.findById(groupId);
+  const conMembers = members.filter(member => !groupMembers.includes(member));
+
+  if (conMembers.length > 0) {
+    return res.status(400).json({ error: true, message: 'There are con members', conMembers });
+  }
+
+  try {
+    const { contribution } = await Group.addContribution(groupId, { title, description, members });
+    return res.status(201).json({ error: false, contribution });
+  } catch (e) {
+    return res.status(400).json({ error: true, message: e.message });
+  }
+};
+
+const getGroupContributions = async (req, res) => {
+  const { groupId } = req.body;
+  if (!groupId) {
+    return res.status(400).json({ error: true, message: 'You need to provide the group id' });
+  }
+  // search to see if group exists
+  const group = await Group.findById(groupId);
+  if (!group) {
+    return res.status(400).json({ error: true, message: 'This group does not exist' });
+  }
+  // eslint-disable-next-line no-empty
+  try {
+    return res.status(200).json({
+      error: false,
+      contributions: await Contribution.find({ group: groupId }).populate('group', 'name') });
+  } catch (e) {
+    return res.status(400).json({ error: true, message: 'Cannot fetch contribution' });
+  }
+};
 
 // const createContribution = async (req, res) => {
 //   // const { title, description, members } = req.body;
@@ -10,7 +79,7 @@ const { Member } = require('../members');
 //   console.log(group);
 
 //   // const newContribution = new Contribution({ title, description, members });
-  
+
 //   try {
 //     // return res.status(201).json({ contribution: await newContribution.save() });
 //     return res.status(201).json({ msg: 'Yeah' });
@@ -80,7 +149,7 @@ const getContributionMembers = async (req, res) => {
 };
 
 module.exports = { getAllContributions,
-  // createContribution, 
-  //  createContributionMembers, 
-  getContributionMembers, 
+  getGroupContributions,
+  createGroupContribution,
+  getContributionMembers,
 };

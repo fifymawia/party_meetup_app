@@ -78,26 +78,5 @@ GroupSchema.statics.addContribution = async function (id, args) {
   };
 };
 
-/** *
- * create a financial contribution purpose and add it to the contribution array in the group */
-GroupSchema.statics.addMember = async function (id, args) {
-  const Member = mongoose.model('Member');
-  // add group id to the contribution  group element
-  // the author of the contribution
-
-  const member = await new Member({ ...args, group: id });
-  // find group with the id provided in the url
-  // push the contribution id in the contributions element
-  const group = await this.findByIdAndUpdate(id, { $push: { members: member.id } });
-
-  // group.contributions.push(meetup);
-
-  // const result = await Promise.all([contribution.save(), group.save()]);
-  // return result;
-  return {
-    member: await member.save(),
-    group: await group.save(),
-  };
-};
 module.exports = (mongoose.model('Group', GroupSchema));
 

@@ -31,7 +31,7 @@ const UserSchema = mongoose.Schema({
   } },
 { timestamps: true,
 });
-
+// creating group
 UserSchema.statics.addGroup = async function (args) {
   const Group = mongoose.model('Group');
   return Group.create(args);

@@ -32,6 +32,7 @@ const ContributionSchema = new Schema({
   // }],
 }, { timestamps: true }
 );
+
 // /** *
 //  * create a financial contribution purpose and add it to the contribution array in the group */
 // ContributionSchema.statics.addMember = async function (id, args) {

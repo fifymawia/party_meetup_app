@@ -2,13 +2,9 @@ const Router = require('express');
 const GroupController = require('./controller');
 
 const routes = new Router();
-// group
-routes.post('/users/:userId/groups/new', GroupController.createGroup);
-// contribution by group
-routes.post('/groups/:groupId/contributions/new', GroupController.createGroupContribution);
-routes.get('/groups/:groupId/contributions', GroupController.getGroupContributions);
-// members by group
-routes.post('/groups/:groupId/members/new', GroupController.createGroupMembers);
-routes.get('/groups/:groupId/members', GroupController.getGroupMembers);
+// Post a group
+routes.post('/groups', GroupController.createGroup);
+// get all groups
+// routes.get('/groups', GroupController.getGroup);
 
 module.exports = routes;
