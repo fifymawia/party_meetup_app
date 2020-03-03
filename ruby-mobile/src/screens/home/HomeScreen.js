@@ -25,9 +25,9 @@ class HomeScreen extends Component {
     FunctionToOpenGroupActivity = () =>
   {
      this.props.navigation.navigate('Create A New Group');
-     
+
   }
- 
+
     render() {
       if (this.state.loading) {
         return (
@@ -40,7 +40,7 @@ class HomeScreen extends Component {
             <Text>HomeScreen</Text>
           </View>
           <View>
-              <Button block light style={{ marginBottom: 5 }} 
+              <Button block light style={{ marginBottom: 5 }}
               onPress = { this.FunctionToOpenGroupActivity }
               //onPress={() => Alert.alert('Are you sure you want to create an account?')}
               >
@@ -48,7 +48,7 @@ class HomeScreen extends Component {
               </Button>
           </View>
           <View>
-              <Button block light 
+              <Button block light
               >
                   <Text>My Groups</Text>
               </Button>

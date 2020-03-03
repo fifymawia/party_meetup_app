@@ -8,7 +8,9 @@
 //     });
 import axios from 'axios';
 
-axios.defaults.baseURL = 'https://32eb22a7.ngrok.io/api';
+axios.defaults.baseURL = 'https://91fc57f6.ngrok.io/api';
+
+
 const fakeGroupId = '5e53e62cba0b532c2c524f5d';
 
 
@@ -17,7 +19,7 @@ export class ContributionApi {
     this.groupId = fakeGroupId;
     this.contributionpath = `groups/${this.groupId}/contributions`;
   }
-  
+
   async fetchGroupContributions() {
     const { data } = await axios.get(this.contributionpath);
     return data.contributions;
@@ -30,6 +32,6 @@ export class ContributionApi {
 //   } catch (e) {
 //       console.log(e);
 //   }
-  
+
 }
 
