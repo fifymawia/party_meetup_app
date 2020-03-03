@@ -4,6 +4,7 @@ const express = require('express');
 const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const authCheck = require('../../utils/authCheck');
 
 // const UsersController = require('./controller');
 
@@ -168,13 +169,13 @@ router.post(
  * @description - Get LoggedIn User
  * @param - /user/me
  */
-router.get('/me', async (req, res) => {
+router.get('/me', authCheck, async (req, res) => {
   try {
     // request.user is getting fetched from Middleware after token authentication
     const user = await User.findById(req.user.id);
     res.json(user);
   } catch (e) {
-    res.send({ message: 'Error in Fetching user' });
+    res.send({ message: e.message });
   }
 });
 // routes.post('/groups/:groupId/contributions/new', UsersController.createGroupContribution);

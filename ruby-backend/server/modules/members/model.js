@@ -21,7 +21,7 @@ const MemberSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Group',
   },
-  contribution: [{
+  contributions: [{
     type: Schema.Types.ObjectId,
     ref: 'Contribution',
   }],

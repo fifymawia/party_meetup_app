@@ -1,5 +1,5 @@
 const Group = require('./model');
-const { Member } = require('../members');
+const Member = require('./model');
 // const { Group } = require('../groups');
 
 // add members array to the group
@@ -35,26 +35,13 @@ const createGroupMembers = async (req, res) => {
     return res.status(400).json({ error: true, message: e.message });
   }
 };
-// get group Members
-
-const getGroupMembers = async (req, res) => {
-  const { groupId } = req.body;
-  if (!groupId) {
-    return res.status(400).json({ error: true, message: 'You need to provide the group id' });
-  }
-  // search to see if group exists
-  const group = await Group.findById(groupId);
-  if (!group) {
-    return res.status(400).json({ error: true, message: 'This group does not exist' });
-  }
-  // eslint-disable-next-line no-empty
+// get all Members
+const getAllMembers = async (req, res) => {
   try {
-    return res.status(200).json({
-      error: false,
-      members: await Member.find({ group: groupId }).populate('group', 'name') });
+    return res.status(200).json({ members: await Member.find({}) });
   } catch (e) {
-    return res.status(400).json({ error: true, message: 'Cannot fetch members' });
+    return res.status(400).json({ error: true, message: e.message });
   }
 };
 
-module.exports = { createGroupMembers, getGroupMembers };
+module.exports = { createGroupMembers, getAllMembers };

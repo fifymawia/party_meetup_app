@@ -1,6 +1,6 @@
 const Contribution = require('./model');
 const Group = require('../groups/model');
-const { Member } = require('../members');
+// const { Member } = require('../members');
 
 // add contribution array to group
 
@@ -51,82 +51,14 @@ const createGroupContribution = async (req, res) => {
   }
 };
 
-const getGroupContributions = async (req, res) => {
-  const { groupId } = req.body;
-  if (!groupId) {
-    return res.status(400).json({ error: true, message: 'You need to provide the group id' });
-  }
-  // search to see if group exists
-  const group = await Group.findById(groupId);
-  if (!group) {
-    return res.status(400).json({ error: true, message: 'This group does not exist' });
-  }
-  // eslint-disable-next-line no-empty
-  try {
-    return res.status(200).json({
-      error: false,
-      contributions: await Contribution.find({ group: groupId }).populate('group', 'name') });
-  } catch (e) {
-    return res.status(400).json({ error: true, message: 'Cannot fetch contribution' });
-  }
-};
-
-// const createContribution = async (req, res) => {
-//   // const { title, description, members } = req.body;
-//   const { groupId } = req.params;
-
-//   const group = Group.findById(groupId);
-//   console.log(group);
-
-//   // const newContribution = new Contribution({ title, description, members });
-
-//   try {
-//     // return res.status(201).json({ contribution: await newContribution.save() });
-//     return res.status(201).json({ msg: 'Yeah' });
-//   } catch (e) {
-//     return res.status(e.status).json({ error: true, message: 'Error With Contribution' });
-//   }
-// };
-
+// get all contributions
 const getAllContributions = async (req, res) => {
   try {
-    return res.status(200).json({ contribution: await Contribution.find({}) });
+    return res.status(200).json({ contributions: await Contribution.find({}) });
   } catch (e) {
-    return res.status(e.status).json({ error: true, message: 'Error With Contribution' });
+    return res.status(e.status).json({ error: true, message: 'Error With Contributions' });
   }
 };
-
-// // members array in a contribution
-// const createContributionMembers = async (req, res) => {
-//   const { name,
-//     phoneNumber,
-//   } = req.body;
-//   const { contributionId } = req.params;
-//   if (!name) {
-//     return res.status(400).json({ error: true, message: 'Name must be provided' });
-//   } else if (typeof name !== 'string') {
-//     return res.status(400).json({ error: true, message: 'Name must be a String' });
-//   } else if (name.length < 5) {
-//     return res.status(400).json({ error: true, message: 'Name must be atleast 5 characters' });
-//   }
-//   if (!phoneNumber) {
-//     return res.status(400).json({ error: true, message: 'PhoneNumber must be provided' });
-//   } else if (typeof phoneNumber !== 'string') {
-//     return res.status(400).json({ error: true, message: 'PhoneNumber must be a String' });
-//   } else if (phoneNumber.length < 10) {
-//     return res.status(400).json({ error: true, message: 'PhoneNumber must be atleast 10 characters' });
-//   }
-//   if (!contributionId) {
-//     return res.status(400).json({ error: true, message: 'ContributionId must be provided' });
-//   }
-//   // eslint-disable-next-line no-empty
-//   try {
-//     const { member, contribution } = await Contribution.addMember(contributionId, { name, phoneNumber });
-//     return res.status(201).json({ error: false, member, contribution });
-//   } catch (e) {
-//     return res.status(400).json({ error: true, message: 'Member cannot be created' });
-//   }
-// };
 
 const getContributionMembers = async (req, res) => {
   const { contributionId } = req.params;
@@ -142,14 +74,16 @@ const getContributionMembers = async (req, res) => {
   try {
     return res.status(200).json({
       error: false,
-      members: await Member.find({ contribution: contributionId }).populate('contribution', 'name') });
+      members: await Contribution.findById(contributionId).populate([
+        { path: 'members', model: 'Member' },
+      ]) });
   } catch (e) {
-    return res.status(400).json({ error: true, message: 'Cannot fetch contribution' });
+    return res.status(400).json({ error: true, message: e.message });
   }
 };
 
-module.exports = { getAllContributions,
-  getGroupContributions,
+module.exports = {
+  getAllContributions,
   createGroupContribution,
   getContributionMembers,
 };

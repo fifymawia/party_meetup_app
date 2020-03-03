@@ -60,13 +60,19 @@ const GroupSchema = new Schema({
  * create a financial contribution purpose and add it to the contribution array in the group */
 GroupSchema.statics.addContribution = async function (id, args) {
   const Contribution = mongoose.model('Contribution');
+  const Member = mongoose.model('Member');
   // add group id to the contribution  group element
   // the author of the contribution
 
-  const contribution = await new Contribution({ ...args, group: id });
+  const contribution = new Contribution({ ...args, group: id });
+
   // find group with the id provided in the url
   // push the contribution id in the contributions element
   const group = await this.findByIdAndUpdate(id, { $push: { contributions: contribution.id } });
+  // const member = await Member.findByIdAndUpdate(id, { $push: { contributions: contribution.id } });
+  args.members.forEach(async member => {
+    await Member.findByIdAndUpdate(member, { $push: { contributions: contribution.id } });
+  });
 
   // group.contributions.push(meetup);
 
@@ -75,6 +81,7 @@ GroupSchema.statics.addContribution = async function (id, args) {
   return {
     contribution: await contribution.save(),
     group,
+
   };
 };
 

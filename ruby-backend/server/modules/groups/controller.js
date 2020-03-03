@@ -1,6 +1,7 @@
 const Group = require('./model');
-// const { Contribution } = require('../contributions');
+const { Contribution } = require('../contributions');
 const { User } = require('../users');
+// const { Member } = require('../members');
 
 const createGroup = async (req, res) => {
   const {
@@ -106,8 +107,84 @@ const createGroup = async (req, res) => {
   // eslint-disable-next-line no-empty
   // user must be in our db
 };
-
 // get all groups
 
-module.exports = { createGroup };
+const getAllgroups = async (req, res) => {
+  try {
+    return res.status(200).json({ groups: await Group.find({}) });
+  } catch (e) {
+    return res.status(e.status).json({ error: true, message: e.message });
+  }
+};
+
+// get a single  group by ID
+
+const getAsingleGroup = async (req, res) => {
+  const { groupId } = req.params;
+  if (!groupId) {
+    return res.status(400).json({ error: true, message: 'You need to provide the group id' });
+  }
+  // search to see if group exists
+  const group = await Group.findById(groupId);
+  if (!group) {
+    return res.status(400).json({ error: true, message: 'This group does not exist' });
+  }
+  // eslint-disable-next-line no-empty
+  try {
+    return res.status(200).json({
+      error: false,
+      group: await Group.find({ group: groupId }).populate('group', 'name') });
+  } catch (e) {
+    return res.status(400).json({ error: true, message: e.message });
+  }
+};
+
+// get contributions in a group
+const getGroupContributions = async (req, res) => {
+  const { groupId } = req.params;
+  if (!groupId) {
+    return res.status(400).json({ error: true, message: 'You need to provide the group id' });
+  }
+  // search to see if group exists
+  const group = await Group.findById(groupId);
+  if (!group) {
+    return res.status(400).json({ error: true, message: 'This group does not exist' });
+  }
+  // eslint-disable-next-line no-empty
+  try {
+    return res.status(200).json({
+      error: false,
+      contributions: await Contribution.find({ group: groupId }).populate('group', 'name') });
+  } catch (e) {
+    return res.status(400).json({ error: true, message: e.message });
+  }
+};
+// get all Members In a group
+
+const getGroupMembers = async (req, res) => {
+  const { groupId } = req.params;
+  if (!groupId) {
+    return res.status(400).json({ error: true, message: 'You need to provide the group id' });
+  }
+  // search to see if group exists
+  const group = await Group.findById(groupId);
+  if (!group) {
+    return res.status(400).json({ error: true, message: 'This group does not exist' });
+  }
+  // eslint-disable-next-line no-empty
+
+  try {
+    return res.status(200).json({
+      error: false,
+
+      // members: await Member.find({ group: groupId }).populate('group', 'name') });
+      members: await Group.findById(groupId).populate([
+        { path: 'members', model: 'Member' },
+      ]) });
+  } catch (e) {
+    return res.status(400).json({ error: true, message: e.message });
+  }
+};
+
+module.exports = { createGroup, getAllgroups, getGroupContributions, getGroupMembers, getAsingleGroup };
 // module.exports = { createGroup };
