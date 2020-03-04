@@ -5,10 +5,8 @@ import { Form, Input, Button, Item } from 'native-base';
 
 
 
-class signUpScreen extends Component {
+class loginScreen extends Component {
     state = {
-        firstName: '',
-        lastName: '',
         phoneNumber: '',
         password: '',
 
@@ -19,40 +17,27 @@ class signUpScreen extends Component {
 
       FunctionToOpenMembersActivity = () =>
       {
-         this.props.navigation.navigate('Login');
+         this.props.navigation.navigate('Home');
 
       }
 
     }
       _checkIfButtonNextDisabled(){
-          const {  firstName, lastName, phoneNumber, password } = this.state;
+          const { phoneNumber, password } = this.state;
       }
 
     render() {
-        if (this.state.loading) {
-            return (
-              <LoadingScreen />
-            );
-          }
+
         return (
             <View>
                <View style={{marginTop: 10, alignItems: 'center' }}>
-                <Text style={{fontSize: 30}}>Sign Up Here
+                <Text style={{fontSize: 30}}>Login Here
                 </Text>
                 </View>
 
                 <View style={{ marginTop: 20 }}>
                  <Form>
-                   <Item>
-                     <Input placeholder="First Name" value={this.state.firstName} />
 
-                   </Item>
-                   <Item >
-                     <Input placeholder="Last Name" value={this.state.lastName} />
-                   </Item>
-                   <Item >
-                     <Input placeholder="Email (Optional)" value={this.state.email} />
-                   </Item>
                    <Item >
                      <Input placeholder="Phone Number" value={this.state.phoneNumber} />
                    </Item>
@@ -67,7 +52,7 @@ class signUpScreen extends Component {
                     disabled = {this._checkIfButtonNextDisabled()}
                     onPress = {this.FunctionToOpenMembersActivity}
                     >
-                        <Text>Sign Up</Text>
+                        <Text>Login</Text>
                     </Button>
                 </View>
                  </Form>
@@ -79,4 +64,4 @@ class signUpScreen extends Component {
         }
 
     }
-export default signUpScreen;
+export default loginScreen;
