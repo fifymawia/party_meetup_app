@@ -12,16 +12,14 @@ class loginScreen extends Component {
 
     }
 
-    constructor(props) {
-        super(props);
 
-      FunctionToOpenMembersActivity = () =>
+      FunctionToOpenHomeActivity = () =>
       {
          this.props.navigation.navigate('Home');
 
       }
 
-    }
+    
       _checkIfButtonNextDisabled(){
           const { phoneNumber, password } = this.state;
       }
@@ -49,8 +47,8 @@ class loginScreen extends Component {
                     <View>
                     <Button block danger
                     style={{ marginTop: 50}}
-                    disabled = {this._checkIfButtonNextDisabled()}
-                    onPress = {this.FunctionToOpenMembersActivity}
+                    // disabled = {this._checkIfButtonNextDisabled()}
+                    onPress = {this.FunctionToOpenHomeActivity}
                     >
                         <Text>Login</Text>
                     </Button>

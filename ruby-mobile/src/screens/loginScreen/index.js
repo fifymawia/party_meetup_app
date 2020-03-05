@@ -1,5 +1,5 @@
-import LoginScreen from './loginScreen';
+import loginScreen from './loginScreen';
 
 export {
-    LoginScreen
+    loginScreen
 };

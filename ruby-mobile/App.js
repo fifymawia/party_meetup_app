@@ -21,7 +21,7 @@ export default class App extends React.Component {
   //  }
   //  async _loadAssetsAsync() {
   //    const fontAssets = cachedFonts([
-    componentWillMount = async () => {
+    UNSAFE_componentWillMount = async () => {
       await Font.loadAsync(
         {
 

@@ -22,7 +22,7 @@ const User = require('./model');
 router.post(
   '/signup',
   [
-    check('firstName', 'Please Enter a Valid Name')
+    check('firstName', 'Please Enter a Valid First Name')
       .not()
       .isEmpty(),
     check('lastName', 'Please Enter a Valid Last Name')
@@ -47,7 +47,7 @@ router.post(
     const {
       firstName,
       lastName,
-      email,
+      // email,
       phoneNumber,
       password,
     } = req.body;
@@ -65,7 +65,7 @@ router.post(
         firstName,
         lastName,
         phoneNumber,
-        email,
+        // email,
         password,
       });
 
@@ -83,7 +83,7 @@ router.post(
       jwt.sign(
         payload,
         'randomString', {
-          // expiresIn: 10000,
+          expiresIn: 10000,
         },
         (err, token) => {
           if (err) throw err;
