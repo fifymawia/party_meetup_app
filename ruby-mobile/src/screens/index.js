@@ -6,3 +6,4 @@ export * from './createGroupScreen';
 export * from './addMembersScreen';
 export * from './signUpScreen';
 export * from './loginScreen';
+export * from './landingScreen';

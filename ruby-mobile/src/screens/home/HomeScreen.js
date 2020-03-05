@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Alert } from 'react-native';
 import { MyContributionsList } from './components';
-import { ContributionApi } from '../../../constants/contributionApi';
+import { ContributionApi } from '../../../constants/Apis';
 import styles from './styles/HomeScreen';
 import { LoadingScreen } from '../../commons';
 import { Button } from 'native-base';

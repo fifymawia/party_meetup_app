@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Form, Button, Item } from 'native-base';
+import PasswordInputText from 'react-native-hide-show-password-input';
 
 
-import { signup } from '../../../constants/groupApi';
+import { signup } from '../../../constants/Apis';
 
 
 class signUpScreen extends Component {
@@ -57,10 +58,6 @@ onChangepassword(e) {
           this.setState({ firstName: '', lastName: '', phoneNumber: '', password: '' })
       }
 
-    //   _checkIfButtonNextDisabled(){
-    //       const {  firstName, lastName, phoneNumber, password } = this.state;
-    //   }
-
     render() {
 
         return (
@@ -84,9 +81,9 @@ onChangepassword(e) {
                 <Item>
                      <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber} />
               </Item>
-                <Item>
-                     <TextInput placeholder="Password" value={this.state.password} onChangeText={this.onChangepassword} />
-                     </Item>
+
+              <PasswordInputText placeholder="Password" value={this.state.password} onChangeText={this.onChangepassword} />
+
                     <View>
                     <Button block danger
                     style={{ marginTop: 50}}

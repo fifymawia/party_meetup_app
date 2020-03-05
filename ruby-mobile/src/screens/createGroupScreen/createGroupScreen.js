@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { Form, Item, Input, Picker, Button } from 'native-base';
 import DatePicker from 'react-native-datepicker';
-import { GroupApi } from '../../../constants/groupApi';
+// import { GroupApi } from '../../../constants/Apis';
 
 
 //import { FormLabel, FormInput } from 'react-native-elements';
-const groupApi = new GroupApi();
+// const groupApi = new GroupApi();
 
 class createGroupScreen extends Component {
     state = {
@@ -16,17 +16,17 @@ class createGroupScreen extends Component {
         frequency: '',
         amount: '',
         proposedDate: '',
-       
+
     }
 
     constructor(props) {
         super(props);
         this.state = {date:"2020-03-1"}
-    
+
         this.state = {
           selected2: undefined
         };
-        
+
       }
       onValueChange2(value) {
         this.setState({
@@ -36,9 +36,9 @@ class createGroupScreen extends Component {
       FunctionToOpenMembersActivity = () =>
       {
          this.props.navigation.navigate('Add Members');
-         
+
       }
-    
+
       _checkIfButtonNextDisabled(){
           const { name, description, bankAccount, frequency, amount, proposedDate } = this.state;
 
@@ -55,9 +55,9 @@ class createGroupScreen extends Component {
     //           bankAccount
     //       });
     //       console.log(res);
-    //   } 
+    //   }
 }
-     
+
     render() {
         return (
             <View>
@@ -66,7 +66,7 @@ class createGroupScreen extends Component {
                 </Text>
                 </View>
                     <View style={{ marginTop: 20 }}>
-              
+
                  <Form>
                    <Item>
                      <Input placeholder=" Group Name" value={this.state.name} />
@@ -144,7 +144,7 @@ class createGroupScreen extends Component {
           </View>
                  </Form>
 
-               
+
              </View>
 </View>
         );
