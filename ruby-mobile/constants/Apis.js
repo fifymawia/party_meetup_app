@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const fakeGroupId = '5e53e62cba0b532c2c524f5d';
 
-axios.defaults.baseURL = 'https://1e9100c6.ngrok.io/api';
+axios.defaults.baseURL = 'https://ff543a0a.ngrok.io/api';
 // sign up api
 export const signup = user => {
     return axios.post('/signup', user)

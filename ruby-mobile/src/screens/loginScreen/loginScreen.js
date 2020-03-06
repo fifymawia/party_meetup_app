@@ -1,13 +1,14 @@
-import React, { Component, useReducer } from 'react';
-import { View, TextInput, Text } from 'react-native';
+import React from 'react';
+import { View, TextInput, Text, Alert } from 'react-native';
 import { Form, Button, Item } from 'native-base';
 import { login } from '../../../constants/Apis';
 import PasswordInputText from 'react-native-hide-show-password-input';
+import ValidationComponent from 'react-native-form-validator';
 
 
 
 
-class loginScreen extends Component {
+class loginScreen extends ValidationComponent {
     constructor(props) {
         super(props);
 
@@ -27,21 +28,39 @@ class loginScreen extends Component {
         this.setState({ password: e })
     }
 
-      FunctionToSubmitLogins(e) {
+      async FunctionToSubmitLogins(e) {
           e.preventDefault()
-         // this.props.navigation.navigate('Home')
+
+
           const userObject = {
               phoneNumber: this.state.phoneNumber,
               password: this.state.password,
 
           };
+          this.validate({
+            phoneNumber: {minlength:10, maxlength:12,   keyboardType:'numeric',
+            required: true},
+            password: {minlength:6, maxlength:10, required: true},
 
+        });
+            // calling the api from api.js
+            const loguser = await login(userObject);
+            this.setState({ phoneNumber: '', password: '' })
+            if(loguser.token){
+                // @TODO store token and redirect: usign asyncStorage
+                this.props.navigation.navigate('Home')
+            }else{
+                if(loguser.message){
+                    Alert.alert(
+                        'Something should pop up'
+                      );
+                }
 
-      const loguser = login(userObject);
-      console.log(loguser);
-
-      this.setState({ phoneNumber: '', password: '' })
+            }
+            console.log(loguser.token);
         }
+
+
 
     render() {
 
@@ -56,9 +75,13 @@ class loginScreen extends Component {
                  <Form>
 
                  <Item>
-                     <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber} />
+                     <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber}
+                                />
+                                 {this.isFieldInError('phoneNumber') && this.getErrorsInField('phoneNumber').map(errorMessage => <Text>{errorMessage}</Text>) }
+
               </Item>
               <PasswordInputText placeholder="Password" value={this.state.password} onChangeText={this.onChangepassword} />
+              {this.isFieldInError('password') && this.getErrorsInField('password').map(errorMessage => <Text>{errorMessage}</Text>) }
 
 
                     <View>

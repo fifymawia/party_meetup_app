@@ -35,6 +35,9 @@ class createGroupScreen extends Component {
       }
       FunctionToOpenMembersActivity = () =>
       {
+        // @TODO: store the form data
+        // by creating form data object
+        // use asyncStorage to store on app
          this.props.navigation.navigate('Add Members');
 
       }

@@ -22,9 +22,11 @@ class HomeScreen extends Component {
       this.setState({ loading: false,contributions });
     //   setTimeout(() => this.setState({ loading: false, contributions }), 2000);
     }
-    FunctionToOpenGroupActivity = () =>
-  {
+    FunctionToOpenGroupActivity = () => {
+    // @TODO: fetch/get/read token
+    // if token: navigate to create group
      this.props.navigation.navigate('Create A New Group');
+    // else alert user authorized
 
   }
 

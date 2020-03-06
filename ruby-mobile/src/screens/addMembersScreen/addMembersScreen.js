@@ -23,7 +23,14 @@ PermissionsAndroid.request(
 
 
 class addMembersScreen extends Component {
-
+    // @TODO: add function to get all data and display on a pop up
+    // keep the add memebers in state
+    // read/fetch/get asyncStorage data
+    // @create initial state and add group details key to it
+    // state = {
+    // member: '',
+    // groupDetails: {}
+    // }
 
 
     render() {
