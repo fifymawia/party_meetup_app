@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, TextInput } from 'react-native';
 import { Form, Button, Item } from 'native-base';
 import PasswordInputText from 'react-native-hide-show-password-input';
+import ValidationComponent from 'react-native-form-validator';
 
 
 import { signup } from '../../../constants/Apis';
 
 
-class signUpScreen extends Component {
+class signUpScreen extends ValidationComponent {
  constructor(props) {
      super(props);
 
@@ -42,7 +43,7 @@ onChangepassword(e) {
     this.setState({ password: e})
 }
 
-      FunctionToSubmitData(e) {
+   async FunctionToSubmitData(e) {
           e.preventDefault()
           const userObject = {
               firstName: this.state.firstName,
@@ -51,13 +52,32 @@ onChangepassword(e) {
               phoneNumber: this.state.phoneNumber,
               password: this.state.password,
           };
-          // console.log(this.state);
-          const user = signup(userObject);
-          console.log(user);
+          // validation
+          this.validate({
+            firstName: {minlength:2, maxlength:10, required: true},
+            lastName: {minlength:2, maxlength:10, required: true},
+            phoneNumber: {minlength:10, maxlength:12,   keyboardType:'numeric',
+            required: true},
+            password: {minlength:6, maxlength:10, required: true},
 
+        });
+          // calling the api from api.js
+          const user = await signup(userObject);
           this.setState({ firstName: '', lastName: '', phoneNumber: '', password: '' })
-      }
+          if(user.token){
+              // @TODO store token and redirect: usign asyncStorage
+              this.props.navigation.navigate('Home')
+          }else{
+              // alert not working
+              if(user.message){
+                  Alert.alert(
+                      'Something should pop up'
+                    );
+              }
 
+          }
+          console.log(user.token);
+      }
     render() {
 
         return (
@@ -71,18 +91,25 @@ onChangepassword(e) {
                  <Form>
                 <Item>
                      <TextInput placeholder="First Name" value={this.state.firstName} onChangeText={this.onChangefirstName}  />
+                     {this.isFieldInError('firstName') && this.getErrorsInField('firstName').map(errorMessage => <Text>{errorMessage}</Text>) }
+
                  </Item>
                  <Item>
                      <TextInput placeholder="Last Name" value={this.state.lastName} onChangeText={this.onChangelastName} />
+                     {this.isFieldInError('lastName') && this.getErrorsInField('lastName').map(errorMessage => <Text>{errorMessage}</Text>) }
+
                      </Item>
                 {/* <Item>
                      <Input placeholder="Email (Optional)" value={this.state.email} onChange={this.onChangeemail} />
                      </Item> */}
                 <Item>
                      <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber} />
+                     {this.isFieldInError('phoneNumber') && this.getErrorsInField('phoneNumber').map(errorMessage => <Text>{errorMessage}</Text>) }
+
               </Item>
 
               <PasswordInputText placeholder="Password" value={this.state.password} onChangeText={this.onChangepassword} />
+              {this.isFieldInError('password') && this.getErrorsInField('password').map(errorMessage => <Text>{errorMessage}</Text>) }
 
                     <View>
                     <Button block danger
