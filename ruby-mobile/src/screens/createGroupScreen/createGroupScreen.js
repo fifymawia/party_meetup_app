@@ -1,65 +1,103 @@
-import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Form, Item, Input, Picker, Button } from 'native-base';
+import React from 'react';
+import { View, Text, TextInput } from 'react-native';
+import { Form, Item, Picker, Button } from 'native-base';
 import DatePicker from 'react-native-datepicker';
-// import { GroupApi } from '../../../constants/Apis';
+import ValidationComponent from 'react-native-form-validator';
+import { createGroup } from '../../../constants/Apis';
+
 
 
 //import { FormLabel, FormInput } from 'react-native-elements';
 // const groupApi = new GroupApi();
 
-class createGroupScreen extends Component {
-    state = {
+class createGroupScreen extends ValidationComponent {
+    constructor(props) {
+        super(props);
+       // this.state = {proposedDate:"2020-03-1"}
+
+        this.onChangename = this.onChangename.bind(this);
+        this.onChangedescription = this.onChangedescription.bind(this);
+        this.onChangebankAccount = this.onChangebankAccount.bind(this);
+        this.onValueChange2 = this.onValueChange2.bind(this);
+        this.onChangeamount = this.onChangeamount.bind(this);
+        this.FunctionToOpenMembersActivity = this.FunctionToOpenMembersActivity.bind(this);
+
+    this.state = {
         name: '',
         description: '',
         bankAccount: '',
-        frequency: '',
+        frequency: undefined,
         amount: '',
-        proposedDate: '',
+        proposedDate: undefined,
 
     }
-
-    constructor(props) {
-        super(props);
-        this.state = {date:"2020-03-1"}
-
-        this.state = {
-          selected2: undefined
-        };
-
-      }
-      onValueChange2(value) {
+}
+    onChangename(e){
+        this.setState({ name: e })
+    }
+    onChangedescription(e){
+        this.setState({ description: e })
+    }
+    onChangebankAccount(e){
+        this.setState({ bankAccount: e })
+    }
+    onValueChange2(e) {
         this.setState({
-          selected2: value
+          frequency: e
         });
       }
-      FunctionToOpenMembersActivity = () =>
-      {
-        // @TODO: store the form data
-        // by creating form data object
-        // use asyncStorage to store on app
-         this.props.navigation.navigate('Add Members');
+      onChangeamount(e){
+        this.setState({ amount: e })
+    }
+    async FunctionToOpenMembersActivity(e) {
+        e.preventDefault()
 
-      }
 
-      _checkIfButtonNextDisabled(){
-          const { name, description, bankAccount, frequency, amount, proposedDate } = this.state;
+        const groupObject = {
+            name: this.state.name,
+            description: this.state.description,
+            bankAccount: this.state.bankAccount,
+            frequency: this.state.frequency,
+            amount: this.state.amount,
+            proposedDate: this.state.proposedDate,
 
-         // if( name.length >5 && description.length > 10 && bankAccount.length > 1()){
-        //      return false;
-    //       }
-    //       return true;
+        };
+        this.validate({
+          name: {required: true},
+          description: {minlength:5, required: true},
+          bankAccount: {minlength:6, maxlength:14, required: true},
+         amount: {required: true},
+         proposedDate: {required: true},
+
+
+
+      });
+       // calling the creategroup api from api.js
+       const newGroup = await createGroup(groupObject);
+       this.setState({ name: '', description: '', bankAccount: '', frequency: '', amount: '', proposedDate: '' })
+       if(newGroup){
+           // @TODO store token and redirect: usign asyncStorage
+           this.props.navigation.navigate('Add Members')
+       }else{
+           if(newGroup.message){
+               Alert.alert(
+                   'Something should pop up'
+                 );
+           }
+
+       }
+       console.log(newGroup);
+   }
+
+    //   FunctionToOpenMembersActivity = () =>
+    //   {
+    //     // @TODO: store the form data
+    //     // by creating form data object
+    //     // use asyncStorage to store on app
+    //      this.props.navigation.navigate('Add Members');
+
     //   }
-    //   _createGroup = async () => {
-    //       const { name, description, bankAccount } = this.state;
-    //       const res = await groupApi.createGroup({
-    //           name,
-    //           description,
-    //           bankAccount
-    //       });
-    //       console.log(res);
-    //   }
-}
+
 
     render() {
         return (
@@ -72,18 +110,25 @@ class createGroupScreen extends Component {
 
                  <Form>
                    <Item>
-                     <Input placeholder=" Group Name" value={this.state.name} />
+                     <TextInput placeholder=" Group Name" value={this.state.name}  onChangeText={this.onChangename}/>
+                     {this.getErrorsInField('name').map(errorMessage => <Text>{errorMessage}</Text>) }
+
 
                    </Item>
                    <Item >
-                     <Input placeholder="Group Description" value={this.state.description} />
+                     <TextInput placeholder="Group Description" value={this.state.description}  onChangeText={this.onChangedescription} />
+                     {this.getErrorsInField('description').map(errorMessage => <Text>{errorMessage}</Text>) }
+
                    </Item>
                    <Item last>
-                     <Input placeholder="Group Account Number" value={this.state.bankAccount} />
+                     <TextInput placeholder="Group Account Number" value={this.state.bankAccount} onChangeText={this.onChangebankAccount} />
+                     {this.getErrorsInField('bankAccount').map(errorMessage => <Text>{errorMessage}</Text>) }
+
                    </Item>
                    <View>
                 <Text style={{ marginTop: 10, marginLeft: 60, fontSize: 20 }}>Select Contribution Frequency
                 </Text>
+
                 </View>
                    <Item picker>
               <Picker
@@ -92,9 +137,10 @@ class createGroupScreen extends Component {
                 placeholder="Select your"
                 placeholderStyle={{ color: "#bfc6ea" }}
                 placeholderIconColor="#007aff"
-                selectedValue={this.state.selected2}
+                selectedValue={this.state.frequency}
                 style={{ marginTop: 10 }}
                 onValueChange={this.onValueChange2.bind(this)}
+
               >
                 <Picker.Item label="Daily" value="key0" />
                 <Picker.Item label="Weekly" value="key1" />
@@ -103,7 +149,9 @@ class createGroupScreen extends Component {
               </Picker>
             </Item>
             <Item style={{ marginTop: 15 }}>
-                     <Input placeholder="Amount Per Contribution"  value={this.state.amount}/>
+                     <TextInput placeholder="Amount Per Contribution"  value={this.state.amount} onChangeText={this.onChangeamount}/>
+                     {this.getErrorsInField('amount').map(errorMessage => <Text>{errorMessage}</Text>) }
+
                    </Item>
                    <View>
                 <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20 }}>Select Proposed Start Date
@@ -113,7 +161,7 @@ class createGroupScreen extends Component {
 <DatePicker
         style={{width: 200}}
         style={{ marginTop: 15, marginLeft: 80 }}
-        date={this.state.date}
+        date={this.state.proposedDate}
         mode="date"
         placeholder="select date"
         format="YYYY-MM-DD"
@@ -133,13 +181,12 @@ class createGroupScreen extends Component {
           }
           // ... You can check the source to find the other keys.
         }}
-        onDateChange={(date) => {this.setState({date: date})}}
+        onDateChange={(proposedDate) => {this.setState({proposedDate: proposedDate})}}
       />
 
             <View>
               <Button block danger
               style={{ marginTop: 50}}
-              disabled = {this._checkIfButtonNextDisabled()}
               onPress = {this.FunctionToOpenMembersActivity}
               >
                   <Text>Next</Text>

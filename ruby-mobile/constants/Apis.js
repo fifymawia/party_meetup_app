@@ -21,6 +21,16 @@ export const login = loguser => {
 
 }
 
+// Creating Group api
+export const createGroup = newGroup => {
+    return axios.post('/groups', newGroup)
+    .then((res) => res.data)
+    .catch((error) => {
+        console.log(error.response.data);
+    });
+
+}
+
 // get contributions api
 export class ContributionApi {
     constructor() {
