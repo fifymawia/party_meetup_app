@@ -41,7 +41,7 @@ class HomeScreen extends Component {
     const token = await retrieveToken();
         if (token !== null) {
             this.setState({ token });
-            console.log(token);
+            console.log('>>> Login Token At Homescreen', token);
             this.props.navigation.navigate('Create A New Group');
         } else{
             Alert.alert('error saving');

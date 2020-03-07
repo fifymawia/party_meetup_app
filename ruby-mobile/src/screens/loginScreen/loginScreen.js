@@ -60,7 +60,8 @@ class loginScreen extends ValidationComponent {
         this.setState({ phoneNumber: '', password: '' })
         if (loguser.token) {
             // @TODO store token and redirect: usign asyncStorage
-            // await saveToken(loguser.token);
+            await saveToken(loguser.token);
+            console.log('>>> Login Token',loguser.token);
             // this.setState({ token })
 
             this.props.navigation.navigate('Home')
@@ -72,7 +73,7 @@ class loginScreen extends ValidationComponent {
             }
 
         }
-        console.log(loguser.token);
+
     }
 
 

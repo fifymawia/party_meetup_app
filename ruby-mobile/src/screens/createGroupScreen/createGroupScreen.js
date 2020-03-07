@@ -76,8 +76,8 @@ class createGroupScreen extends ValidationComponent {
         const newGroup = await createGroup(groupObject);
         this.setState({ name: '', description: '', bankAccount: '', frequency: '', amount: '', proposedDate: '' })
         if (newGroup) {
-            // @TODO store token and redirect: usign asyncStorage
-            this.props.navigation.navigate('Add Members')
+
+            this.props.navigation.navigate('Add Members');
         } else {
             if (newGroup.message) {
                 Alert.alert(
@@ -133,10 +133,10 @@ class createGroupScreen extends ValidationComponent {
                                 onValueChange={this.onValueChange2.bind(this)}
 
                             >
-                                <Picker.Item label="Daily" value="key0" />
-                                <Picker.Item label="Weekly" value="key1" />
-                                <Picker.Item label="Every 2 Weeks" value="key2" />
-                                <Picker.Item label="Monthly" value="key3" />
+                                <Picker.Item label="Daily" value="Daily" />
+                                <Picker.Item label="Weekly" value="Weekly" />
+                                <Picker.Item label="Every 2 Weeks" value="Every 2 Weeks" />
+                                <Picker.Item label="Monthly" value="Monthly" />
                             </Picker>
                         </Item>
                         <Item style={{ marginTop: 15 }}>
