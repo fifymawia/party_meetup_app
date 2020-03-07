@@ -14,6 +14,6 @@ module.exports = (req, res, next) => {
     req.user = decoded.user;
     next();
   } catch (error) {
-    res.status(401).send('UnAthorized');
+    res.status(401).send(error.message);
   }
 };

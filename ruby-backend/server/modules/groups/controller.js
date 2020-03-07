@@ -1,7 +1,7 @@
 const Group = require('./model');
 const { Contribution } = require('../contributions');
 const { User } = require('../users');
-// const { Member } = require('../members');
+const Member = require('../members/model');
 
 const createGroup = async (req, res) => {
   const {
@@ -11,10 +11,9 @@ const createGroup = async (req, res) => {
     frequency,
     amount,
     proposedDate,
-    userId,
     // category
   } = req.body;
-  // const { userId } = req.params;
+  const userId = req.user.id;
   // name authentication
   if (!name) {
     return res.status(400).json({ error: true, message: 'Name must be provided' });
@@ -94,7 +93,7 @@ const createGroup = async (req, res) => {
     // console.log(group, admin);
 
     // Add Admin to the Group
-    const result = await Group.addMember(group._id, {
+    const result = await Member.addMember(group._id, {
       name: `${admin.firstName} ${admin.lastName}`,
       phoneNumber: admin.phoneNumber,
       userId: admin._id,

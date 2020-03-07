@@ -5,6 +5,17 @@ import { ContributionApi } from '../../../constants/Apis';
 import styles from './styles/HomeScreen';
 import { LoadingScreen } from '../../commons';
 import { Button } from 'native-base';
+// import AsyncStorage from '@react-native-community/async-storage';
+import { AsyncStorage } from 'react-native';
+
+export const retrieveToken = async () => {
+    try {
+      return await AsyncStorage.getItem('token');
+    } catch (e) {
+      alert('Failed to load token.')
+    }
+  }
+
 
 const contributionApi = new ContributionApi();
 
@@ -21,14 +32,21 @@ class HomeScreen extends Component {
       const contributions = await this.props.contributionApi.fetchGroupContributions();
       this.setState({ loading: false,contributions });
     //   setTimeout(() => this.setState({ loading: false, contributions }), 2000);
+    // AsyncStorage.getItem('token')
+    // .then(console.log)
+    // .catch(console.log)
     }
-    FunctionToOpenGroupActivity = () => {
+    FunctionToOpenGroupActivity = async () => {
     // @TODO: fetch/get/read token
-    // if token: navigate to create group
-     this.props.navigation.navigate('Create A New Group');
-    // else alert user authorized
-
-  }
+    const token = await retrieveToken();
+        if (token !== null) {
+            this.setState({ token });
+            console.log(token);
+            this.props.navigation.navigate('Create A New Group');
+        } else{
+            Alert.alert('error saving');
+        }
+    }
 
     render() {
       if (this.state.loading) {
