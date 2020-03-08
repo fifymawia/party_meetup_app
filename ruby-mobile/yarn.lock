@@ -3028,6 +3028,13 @@ expo-constants@~8.0.0:
   dependencies:
     ua-parser-js "^0.7.19"
 
+expo-contacts@~8.0.0:
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/expo-contacts/-/expo-contacts-8.0.0.tgz#495b61061538c458de949cfe56bedaef83a96490"
+  integrity sha512-hkXbzwEhAJGUDPwa6se93jLXWrDlmSwPCB1ytCDZ7VdOQElP1OM5XQXDOVKVNsF9dtGxr66GpGzW73amtpUV2g==
+  dependencies:
+    uuid-js "^0.7.5"
+
 expo-error-recovery@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/expo-error-recovery/-/expo-error-recovery-1.0.0.tgz#2ca9d59fcd16c5c881af877993731056f2d46afe"
@@ -5504,6 +5511,11 @@ react-native-action-sheet@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/react-native-action-sheet/-/react-native-action-sheet-2.2.0.tgz#309a87f53bf4e7b17fdd9d24b10b8dcbaebb7230"
   integrity sha512-4lsuxH+Cn3/aUEs1VCwqvLhEFyXNqYTkT67CzgTwlifD9Ij4OPQAIs8D+HUD9zBvWc4NtT6cyG1lhArPVMQeVw==
+
+react-native-contacts-sectionlist@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-contacts-sectionlist/-/react-native-contacts-sectionlist-1.0.2.tgz#31416ba5f982851de92cef6534ab47d45166a8e3"
+  integrity sha512-oFuDU5OrRd3U/jxH4vmcYcD9APv++I4mNttYuh15NfThZpLGrM4LGKllQG/CHir609SF3spjqaWo5/OYK3iEhA==
 
 react-native-contacts@^5.0.7:
   version "5.0.7"

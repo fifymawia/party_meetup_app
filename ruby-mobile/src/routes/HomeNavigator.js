@@ -8,7 +8,7 @@ const Home = createStackNavigator();
 
 export default function HomeNavigator() {
   return(
-    <Home.Navigator initialRouteName="Credbook App">
+    <Home.Navigator initialRouteName="Add Members">
          <Home.Screen
         name="Credbook App"
         component={landingScreen}>

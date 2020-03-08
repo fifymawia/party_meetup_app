@@ -1,51 +1,93 @@
-import React, { Component } from 'react';
+
+
+import React, { useEffect, useState } from 'react';
 import { View, Text } from 'react-native';
-import Contacts from 'react-native-contacts';
-import { PermissionsAndroid } from 'react-native';
-
-PermissionsAndroid.request(
-    PermissionsAndroid.PERMISSIONS.READ_CONTACTS,
-    PermissionsAndroid.PERMISSIONS.WRITE_CONTACTS,
-    {
-      'title': 'Contacts',
-      'message': 'CredBook would like to view your contacts.',
-      'buttonPositive': 'Please accept bare mortal'
-    }
-  ).then(() => {
-    Contacts.getAll((err, contacts) => {
-      if (err === 'denied'){
-        // error
-      } else {
-        // contacts returned in Array
-      }
-    });
-  });
+import * as Contacts from 'expo-contacts';
+import { ScrollView } from 'react-native-gesture-handler';
+import { ListItem, CheckBox, Body, Content, Button } from 'native-base';
 
 
-class addMembersScreen extends Component {
-    // @TODO: add function to get all data and display on a pop up
-    // keep the add memebers in state
-    // read/fetch/get asyncStorage data
-    // @create initial state and add group details key to it
-    // state = {
-    // member: '',
-    // groupDetails: {}
-    // }
+export default function App() {
+    const [contacts, setContacts] = useState([]);
+    const [members, setMembers] = useState([]);
+useEffect(() => {
+    (async () => {
+      const { status } = await Contacts.requestPermissionsAsync();
+      if (status === 'granted') {
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
+        });
 
-
-    render() {
-        return (
-            <View>
-               <View style={{marginTop: 30, alignItems: 'center' }}>
-                <Text style={{fontSize: 30}}>Group Setup Info
-                </Text>
-                </View>
-
-             </View>
-
-        );
+        if (data.length > 0) {
+            setContacts(data);
+          console.log(data[0]);
         }
+      }
+    })();
+  }, []);
 
+  const setChecked = (members, data) => {
+    let existingMember = members.find(x => x.phone === data.phone);
+    // console.log(existingMember);
+    if (existingMember) {
+        return true;
+    } else {
+        return false;
+    }
+  }
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+      <ScrollView>
+        <Text>Contacts Module Example</Text>
+        <Content>
+            {contacts.map(contact => (
+                <ListItem key={contact.id}>
+                <Body>
+                    <Text>{contact.name}</Text>
+                    {contact.phoneNumbers && contact.phoneNumbers.map(phoneNumber => (
+                        <View
+                            key={phoneNumber.id}
+                        >
+                            <CheckBox
+                                onPress={e => {
+                                    console.log(members);
+                                    const newMember = { name: contact.name, phone: phoneNumber.number };
+                                    let newMembers = [];
+                                    let existingMember = members.find(x => x.phone === newMember.phone);
+                                    if (existingMember) {
+                                        newMembers = members.filter(m => m.name !== newMember.name);
+                                    } else {
+                                        newMembers = [...members, newMember];
+                                    }
+
+                                    setMembers(newMembers);
+                                }}
+                                checked={setChecked(members, { name: contact.name, phone: phoneNumber.number })}
+                            />
+                            <Text>{phoneNumber.number}</Text>
+                        </View>
+                    ))}
+                </Body>
+            </ListItem>
+            ))}
+        </Content>
+      </ScrollView>
+      <Button
+      onPress={e => {
+          console.log(members.map(member => ({ name: member.name, phoneNumber: member.phone })));
+      }}
+      >
+          <Text>Send</Text>
+      </Button>
+    </View>
+  );
 }
-export default addMembersScreen;
- 
+
+// export default addMembersScreen;
