@@ -37,8 +37,8 @@ export const createGroup = async newGroup => {
 }
 
 //api for adding members to a group
-export const addMembers = async newMember => {
-    return axios.post('/members', newMember, {
+export const addMembers = async addNewMember => {
+    return axios.post('/members', addNewMember, {
         headers: {
             authorization: `Bearer ${await AsyncStorage.getItem('token')}`
         }

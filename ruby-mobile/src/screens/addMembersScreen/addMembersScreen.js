@@ -5,26 +5,29 @@ import { View, Text } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ListItem, CheckBox, Body, Content, Button } from 'native-base';
+import { addMembers } from '../../../constants/Apis';
 
 
-export default function App() {
-    const [contacts, setContacts] = useState([]);
-    const [members, setMembers] = useState([]);
-useEffect(() => {
-    (async () => {
-      const { status } = await Contacts.requestPermissionsAsync();
-      if (status === 'granted') {
-        const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
-        });
+    export default function App({ route, navigation }) {
+        const [contacts, setContacts] = useState([]);
+        const [members, setMembers] = useState([]);
+    useEffect(() => {
+        (async () => {
+        const { status } = await Contacts.requestPermissionsAsync();
+        if (status === 'granted') {
+            const { data } = await Contacts.getContactsAsync({
+            fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
+            });
 
-        if (data.length > 0) {
-            setContacts(data);
-          console.log(data[0]);
+            if (data.length > 0) {
+                setContacts(data);
+            console.log(data[0]);
+            }
         }
-      }
-    })();
-  }, []);
+        })();
+    }, []);
+
+console.log(route);
 
   const setChecked = (members, data) => {
     let existingMember = members.find(x => x.phone === data.phone);
@@ -80,8 +83,26 @@ useEffect(() => {
         </Content>
       </ScrollView>
       <Button
-      onPress={e => {
-          console.log(members.map(member => ({ name: member.name, phoneNumber: member.phone })));
+      onPress={async e => {
+          const formatedMemebers = members.map(member => ({ name: member.name, phoneNumber: member.phone }));
+          console.log(formatedMemebers);
+        //  const membersArray = [{
+              const results = await Promise.all(formatedMemebers.map(m => addMembers({
+                  ...m,
+                  groupId: route.params.groupId
+              })));
+            if (results) {
+                navigation.navigate('Home');
+            } else {
+                if (results.message) {
+                    Alert.alert(
+                        'Something should pop up'
+                    );
+                }
+
+            }
+
+
       }}
       >
           <Text>Send</Text>

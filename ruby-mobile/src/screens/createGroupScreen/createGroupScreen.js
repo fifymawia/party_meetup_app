@@ -72,22 +72,22 @@ class createGroupScreen extends ValidationComponent {
 
 
         });
-        // calling the creategroup api from api.js
-        const newGroup = await createGroup(groupObject);
-        this.setState({ name: '', description: '', bankAccount: '', frequency: '', amount: '', proposedDate: '' })
-        if (newGroup) {
+            // calling the creategroup api from api.js
+            const newGroup = await createGroup(groupObject);
+            this.setState({ name: '', description: '', bankAccount: '', frequency: '', amount: '', proposedDate: '' })
+            if (newGroup) {
 
-            this.props.navigation.navigate('Add Members');
-        } else {
-            if (newGroup.message) {
-                Alert.alert(
-                    'Something should pop up'
-                );
+                this.props.navigation.navigate('Add Members', { groupId: newGroup.result.group._id });
+            } else {
+                if (newGroup.message) {
+                    Alert.alert(
+                        'Something should pop up'
+                    );
+                }
+
             }
-
+            console.log(newGroup);
         }
-        console.log(newGroup);
-    }
 
 
     render() {
