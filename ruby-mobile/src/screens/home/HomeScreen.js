@@ -35,7 +35,9 @@ class HomeScreen extends Component {
     // AsyncStorage.getItem('token')
     // .then(console.log)
     // .catch(console.log)
+    
     }
+
     FunctionToOpenGroupActivity = async () => {
     // @TODO: fetch/get/read token
     const token = await retrieveToken();
@@ -47,6 +49,18 @@ class HomeScreen extends Component {
             Alert.alert('error saving');
         }
     }
+    FunctionToOpenContributionsActivity = async () => {
+        // @TODO: fetch/get/read token
+        const token = await retrieveToken();
+            if (token !== null) {
+                this.setState({ token });
+                console.log('>>> Login Token At Homescreen', token);
+                this.props.navigation.navigate('Record Contributions');
+            } else{
+                Alert.alert('error saving');
+            }
+        }
+
 
     render() {
       if (this.state.loading) {
@@ -69,8 +83,9 @@ class HomeScreen extends Component {
           </View>
           <View>
               <Button block light
+              onPress = { this.FunctionToOpenGroupActivity }
               >
-                  <Text>My Groups</Text>
+                  <Text>Record Today's Contributions</Text>
               </Button>
           </View>
 

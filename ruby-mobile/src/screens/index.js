@@ -7,3 +7,4 @@ export * from './addMembersScreen';
 export * from './signUpScreen';
 export * from './loginScreen';
 export * from './landingScreen';
+export * from './contributionsScreen';

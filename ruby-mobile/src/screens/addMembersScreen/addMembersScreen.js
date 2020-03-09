@@ -83,6 +83,7 @@ console.log(route);
         </Content>
       </ScrollView>
       <Button
+      block danger
       onPress={async e => {
           const formatedMemebers = members.map(member => ({ name: member.name, phoneNumber: member.phone }));
           console.log(formatedMemebers);

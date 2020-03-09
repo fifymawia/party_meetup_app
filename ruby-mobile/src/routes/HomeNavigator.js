@@ -1,6 +1,6 @@
 import React from 'react';
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createGroupScreen, addMembersScreen, signUpScreen, loginScreen, landingScreen} from '../screens';
+import { createGroupScreen, addMembersScreen, signUpScreen, loginScreen, landingScreen, contributionsScreen } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './TabNavigator';
 
@@ -8,7 +8,7 @@ const Home = createStackNavigator();
 
 export default function HomeNavigator() {
   return(
-    <Home.Navigator initialRouteName="Credbook App">
+    <Home.Navigator initialRouteName="Record Contributions">
          <Home.Screen
         name="Credbook App"
         component={landingScreen}>
@@ -32,6 +32,10 @@ export default function HomeNavigator() {
       <Home.Screen
         name="Login"
         component={loginScreen}>
+      </Home.Screen>
+      <Home.Screen
+        name="Record Contributions"
+        component={contributionsScreen}>
       </Home.Screen>
     </Home.Navigator>
   );
