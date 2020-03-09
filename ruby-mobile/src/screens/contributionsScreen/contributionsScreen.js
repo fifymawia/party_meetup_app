@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import {  Button } from 'native-base';
+import { Button } from 'native-base';
 import { GetMembers } from '../../../constants/Apis';
 // import styles from '../home/components/styles/MyContributionsList';
 // new
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { Table, TableWrapper, Row, Cell } from 'react-native-table-component';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const getMembers = new GetMembers();
 
@@ -16,76 +17,143 @@ export default class contributionsScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          tableHead: ['Name', 'Contact', 'Verify Payment'],
-          tableData: [],
-          loading: false,
-          groupmembers: [],
+            tableHead: ['Name', 'Contact', 'Verify Payment'],
+            tableData: [],
+            loading: false,
+            addpaidMembers: [],
+            groupMembers: [],
         }
-      }
+    }
 
 
-  async componentDidMount() {
-    this.setState({ loading: true });
-    const members = await this.props.getMembers.fetchGroupMembers();
-    this.setState({ loading: false,groupmembers: members.members });
-    // console.log(this.state.groupmembers);
 
-  // AsyncStorage.getItem('token')
-//  .then(console.log)
-  // .catch(console.log)
-  }
 
-  _alertIndex(index) {
-    Alert.alert(`This is row ${index.name}`);
-  }
+    async componentDidMount() {
+        this.setState({ loading: true });
+        const members = await this.props.getMembers.fetchGroupMembers();
+        this.setState({ loading: false, groupMembers: members.members });
+        // console.log(this.state.groupmembers);
 
-  render() {
-    const state = this.state;
-    const element = (index) => (
-      <TouchableOpacity onPress={() => this._alertIndex(index)}>
-        <View style={styles.btn}>
-          <Text style={styles.btnText}>Paid</Text>
-        </View>
-      </TouchableOpacity>
-    );
-// map group.members.name and group.members.phoneNumber
-    return (
-      <View style={styles.container}>
-        <Table borderStyle={{borderColor: 'transparent'}}>
-          <Row data={state.tableHead} style={styles.head} textStyle={styles.text}/>
-          {
-            state.groupmembers.map((rowData, index) => (
-              <TableWrapper key={index} style={styles.row}>
-              {
-              //   rowData.map((cellData, cellIndex) => (
-                  <Cell key={rowData._id} data={index === state.groupmembers.length ? element(rowData, index) : [rowData.name]} textStyle={styles.text}/>
-              //   ))
-              }
-              {
-              //   rowData.map((cellData, cellIndex) => (
-                  <Cell key={rowData._id} data={index === state.groupmembers.length ? element(rowData, index) : [rowData.phoneNumber]} textStyle={styles.text}/>
-              //   ))
-              }
-              {
-              //   rowData.map((cellData, cellIndex) => (
-                  <Cell key={rowData._id} data={index === index ? element(rowData, index) : []} textStyle={styles.text}/>
-              //   ))
-              }
-              </TableWrapper>
-            ))
-          }
-        </Table>
-      </View>
-    )
-  }
+    }
+
+
+    _alertIndex(index) {
+        Alert.alert(`This is row ${index.name}`);
+    }
+
+    Paid = (rowData) => {
+        let memberPaid = this.state.addpaidMembers.find(x => x.phone === rowData.phoneNumber);
+        // console.log(memberPaid);
+        if (memberPaid) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+
+    render() {
+        const state = this.state;
+        const element = (rowData, index) => (
+            <TouchableOpacity    onPress={e => {
+
+            const addpaidMember = { name: rowData.name, phone: rowData.phoneNumber };
+            let addpaidMembers = [];
+            let memberPaid = state.addpaidMembers.find(x => x.phone === addpaidMember.phone);
+            if (memberPaid) {
+                addpaidMembers = state.addpaidMembers.filter(m => m.name !== addpaidMember.name);
+            } else {
+                addpaidMembers = [...state.addpaidMembers, addpaidMember];
+            }
+
+            this.setState({addpaidMembers});
+console.log(this.state.addpaidMembers);
+           // pressed = {Paid(groupmembers, {name: rowData.name, phoneNumber.number})
+        }}>
+
+                <View style={styles.btn}>
+                    <Text style={styles.btnText}>{this.Paid(rowData) ? "Paid" : "Not Paid"}</Text>
+                </View>
+            </TouchableOpacity>
+        );
+        // map group.members.name and group.members.phoneNumber
+        return (
+
+            <View>
+
+                <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20 }}>Verify Members Contributions</Text>
+                <View>
+                    <ScrollView>
+                        <View>
+
+                            <Table borderStyle={{ borderColor: 'transparent' }}>
+                                <Row data={state.tableHead} style={styles.head} textStyle={styles.text} />
+                                {
+                                    state.groupMembers.map((rowData, index) => (
+                                        <TableWrapper key={index} style={styles.row}>
+                                            {
+                                                //   map name
+                                                <Cell  data={index === state.groupMembers.length ? element(rowData, index) : [rowData.name]} textStyle={styles.text} />
+                                                //   ))
+                                            }
+                                            {
+                                                //   map phone number
+                                                <Cell  data={index === state.groupMembers.length ? element(rowData, index) : [rowData.phoneNumber]} textStyle={styles.text} />
+                                                //   ))
+                                            }
+                                            {
+                                                //   touchableopacity
+                                                <Cell  data={index === index ? element(rowData, index) : []} textStyle={styles.text} />
+                                                //   ))
+                                            }
+                                        </TableWrapper>
+                                    ))
+                                }
+                            </Table>
+
+                        </View>
+
+                    </ScrollView>
+                </View>
+                <Button block danger
+                onPress={async e => {
+                    const chosenMembers = this.state.addpaidMembers.map(addpaidMember=>({
+                       name: addpaidMember.name,
+                        phoneNumber: addpaidMember.phoneNumber
+                    }));
+                    const results = await Promise.all(chosenMembers.map(m => addContribution({
+                        ...m,
+                        groupId: route.params.groupId
+                    })));
+                    if (results) {
+                        this.props.navigation.navigate('Home');
+                    } else {
+                        if (results.message) {
+                            Alert.alert(
+                                'oopps'
+                            );
+                        }
+
+                    }
+
+
+
+                }}>
+                    <Text>Submit</Text>
+                </Button>
+
+            </View>
+        )
+    }
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-  head: { height: 40, backgroundColor: '#808B97' },
-  text: { margin: 6 },
-  row: { flexDirection: 'row', backgroundColor: '#FFF1C1' },
-  btn: { width: 58, height: 18, backgroundColor: '#78B7BB',  borderRadius: 2 },
-  btnText: { textAlign: 'center', color: '#fff' }
+    container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
+    head: { height: 40, backgroundColor: '#808B97' },
+    text: { margin: 6 },
+    row: { flexDirection: 'row', backgroundColor: '#FFF1C1' },
+    btn: { width: 58, height: 18, backgroundColor: '#78B7BB', borderRadius: 2 },
+    btnText: { textAlign: 'center', color: '#fff' }
 });
 

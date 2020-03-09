@@ -106,6 +106,26 @@ const createGroup = async (req, res) => {
   // eslint-disable-next-line no-empty
   // user must be in our db
 };
+
+// // get allgroups where user is an admin
+// const getUsersGroups = async (req, res) => {
+//   const { userId } = req.params;
+//   if (!userId) {
+//     return res.status(400).json({ error: true, message: 'You need to provide the user id' });
+//   }
+//   const usersGroup = await Group.findById(userId);
+//   if (!usersGroup) {
+//     return res.status(400).json({ error: true, message: 'This user is not in any Groups' });
+//   }
+//   try {
+//     return res.status(200).json({
+//       error: false,
+//       group: await Group.find({ group: userId }).populate('group', 'name') });
+//   } catch (e) {
+//     return res.status(400).json({ error: true, message: e.message });
+//   }
+// };
+
 // get all groups
 
 const getAllgroups = async (req, res) => {

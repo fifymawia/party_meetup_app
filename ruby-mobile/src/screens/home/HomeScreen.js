@@ -35,7 +35,7 @@ class HomeScreen extends Component {
     // AsyncStorage.getItem('token')
     // .then(console.log)
     // .catch(console.log)
-    
+
     }
 
     FunctionToOpenGroupActivity = async () => {
@@ -49,17 +49,34 @@ class HomeScreen extends Component {
             Alert.alert('error saving');
         }
     }
-    FunctionToOpenContributionsActivity = async () => {
-        // @TODO: fetch/get/read token
+    FunctionToOpenMyGroups = async () => {
+        // @TODO: onpress use token to get userId
         const token = await retrieveToken();
-            if (token !== null) {
-                this.setState({ token });
-                console.log('>>> Login Token At Homescreen', token);
-                this.props.navigation.navigate('Record Contributions');
-            } else{
-                Alert.alert('error saving');
-            }
+        if (token !== null) {
+            this.setState({ token });
+            console.log('>>> Login Token At Homescreen', token);
+            this.props.navigation.navigate('My Groups');
+        } else{
+            Alert.alert('error saving');
         }
+        //checks groups where user is admin
+        // fetches
+
+
+
+        }
+
+    // FunctionToOpenContributionsActivity = async () => {
+    //     // @TODO: fetch/get/read token
+    //     const token = await retrieveToken();
+    //         if (token !== null) {
+    //             this.setState({ token });
+    //             console.log('>>> Login Token At Homescreen', token);
+    //             this.props.navigation.navigate('Record Contributions');
+    //         } else{
+    //             Alert.alert('error saving');
+    //         }
+    //     }
 
 
     render() {
@@ -83,9 +100,16 @@ class HomeScreen extends Component {
           </View>
           <View>
               <Button block light
-              onPress = { this.FunctionToOpenGroupActivity }
+              onPress = { this.FunctionToOpenMyGroups }
               >
-                  <Text>Record Today's Contributions</Text>
+                  <Text>savings</Text>
+              </Button>
+          </View>
+          <View>
+              <Button block light
+              onPress = { this.FunctionToOpenMyGroups }
+              >
+                  <Text>Activities and Progress</Text>
               </Button>
           </View>
 

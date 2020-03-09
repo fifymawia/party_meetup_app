@@ -5,20 +5,8 @@ import { Button, Form} from 'native-base';
 
 
 
-class loginScreen extends Component {
+class myGroupsScreen extends Component {
 
-
-
-      FunctionToOpenLoginActivity = () =>
-      {
-         this.props.navigation.navigate('Login');
-
-      }
-      FunctionToOpenSignUpActivity = () =>
-      {
-         this.props.navigation.navigate('Sign Up');
-
-      }
 
 
     render() {
@@ -30,9 +18,9 @@ class loginScreen extends Component {
                     <Button block danger
                         style={{ marginTop: 50 }}
                         // disabled = {this._checkIfButtonNextDisabled()}
-                        onPress={this.FunctionToOpenLoginActivity}
+
                     >
-                        <Text>Login</Text>
+                        <Text>group 1</Text>
                     </Button>
                 </View>
 
@@ -40,9 +28,9 @@ class loginScreen extends Component {
                     <Button
                         style={{ marginTop: 50, color:'$redColor'}}
                         // disabled = {this._checkIfButtonNextDisabled()}
-                        onPress={this.FunctionToOpenSignUpActivity}
+
                     >
-                        <Text>Sign Up</Text>
+                        <Text>Group2</Text>
                     </Button>
                 </View>
             </View>
@@ -50,4 +38,4 @@ class loginScreen extends Component {
     }
 
 }
-export default loginScreen;
+export default myGroupsScreen;
