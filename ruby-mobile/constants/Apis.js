@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const fakeGroupId = '5e653d619ec93e29680685fc';
 
-axios.defaults.baseURL = 'https://783980bc.ngrok.io/api';
+axios.defaults.baseURL = 'https://82574c97.ngrok.io/api';
 import { AsyncStorage } from 'react-native';
 // sign up api
 export const signup = user => {
@@ -35,19 +35,19 @@ export const createGroup = async newGroup => {
         });
 
 }
-//api to fetch groups where user is the admin
-export class GetUsersGroups {
-    constructor() {
-        this.fakeUserId = "5e6118a05dc54415086af3d6";
+// //api to fetch groups where user is the admin
+// export class GetUsersGroups {
+//     constructor() {
+//         this.fakeUserId = "5e6118a05dc54415086af3d6";
 
-        this.groupsPath = `groups/${this.admin}/members`;
-    }
+//         this.groupsPath = `groups/${this.admin}/members`;
+//     }
 
-    async fetchUsersGroups() {
-        const { data } = await axios.get(this.groupsPath);
-        return data.members;
-    }
-}
+//     async fetchUsersGroups() {
+//         const { data } = await axios.get(this.groupsPath);
+//         return data.members;
+//     }
+// }
 
 
 //api for adding members to a group

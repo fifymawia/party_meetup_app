@@ -5,6 +5,7 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authCheck = require('../../utils/authCheck');
+const { Group } = require('../groups/model');
 
 // const UsersController = require('./controller');
 
@@ -179,18 +180,10 @@ router.get('/me', authCheck, async (req, res) => {
   }
 });
 
-// const getAllusers = async (req, res) => {
-//   try {
-//     return res.status(200).json({ users: await User.find({}) });
-//   } catch (e) {
-//     return res.status(e.status).json({ error: true, message: e.message });
-//   }
-// };
-
-// // get all users
-router.get('/users', async (req, res) => {
+// // get all groups where user is an admin
+router.get('/users', authCheck, async (req, res) => {
   try {
-    const admin = await User.findById(req.group.admin);
+    const admin = await Group.find({ admin: req.user.id });
     res.json(admin);
   } catch (e) {
     res.send({ message: e.message });
@@ -199,4 +192,4 @@ router.get('/users', async (req, res) => {
 // routes.post('/groups/:groupId/contributions/new', UsersController.createGroupContribution);
 // routes.get('/groups/:groupId/contributions', UsersController.getGroupContributions);
 
-module.exports = { router };
+module.exports = router;

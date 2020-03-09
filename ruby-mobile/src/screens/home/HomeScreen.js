@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { View, Text, Alert } from 'react-native';
-import { MyContributionsList } from './components';
+import { View, Text, Alert, Image } from 'react-native';
+//import { MyContributionsList } from './components';
 import { ContributionApi } from '../../../constants/Apis';
 import styles from './styles/HomeScreen';
 import { LoadingScreen } from '../../commons';
 import { Button } from 'native-base';
+// import { images } from '../../../assets/Images';
+
 // import AsyncStorage from '@react-native-community/async-storage';
 import { AsyncStorage } from 'react-native';
 
@@ -87,11 +89,13 @@ class HomeScreen extends Component {
       }
       return (
         <View style={styles.root}>
-          <View style={styles.topContainer}>
+         <View style={styles.topContainer}>
+
             <Text>HomeScreen</Text>
+        
           </View>
           <View>
-              <Button block light style={{ marginBottom: 5 }}
+              <Button block light style={{ marginBottom: 25 }}
               onPress = { this.FunctionToOpenGroupActivity }
               //onPress={() => Alert.alert('Are you sure you want to create an account?')}
               >
@@ -99,23 +103,24 @@ class HomeScreen extends Component {
               </Button>
           </View>
           <View>
-              <Button block light
+              <Button block light style={{ marginBottom: 20 }}
               onPress = { this.FunctionToOpenMyGroups }
               >
                   <Text>savings</Text>
               </Button>
           </View>
           <View>
-              <Button block light
+              <Button block light style={{ marginTop: 5 }}
+              style={{ marginBottom: 15 }}
               onPress = { this.FunctionToOpenMyGroups }
               >
                   <Text>Activities and Progress</Text>
               </Button>
           </View>
-
+{/*
           <View style={styles.bottomContainer}>
             <MyContributionsList contributions={this.state.contributions} />
-          </View>
+          </View> */}
         </View>
       );
     }
