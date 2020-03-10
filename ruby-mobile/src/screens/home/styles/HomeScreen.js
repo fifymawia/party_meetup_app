@@ -4,19 +4,35 @@ const styles = EStyleSheet.create({
   root: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '$blackBlueColor',
+    // backgroundColor: '$blackBlueColor',
   },
   topContainer: {
-    flex: 2,
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    // backgroundColor: 'red',
+    backgroundColor: '$redColor',
   },
   bottomContainer: {
-    flex: 1,
-    marginTop: 30,
-    // backgroundColor: '$blackBlueColor',
+    flex: 3,
+    marginTop: 5,
+    backgroundColor: '$whiteColor',
 
+  },
+  buttonText: {
+    color: '$redColor',
+    fontWeight: 'bold',
+    textAlign: 'center',
+   alignItems: 'center',
+   justifyContent: 'center',
+
+  },
+  myCard: {
+   height: 200,
+    width: 175,
+    marginLeft: 5,
+    marginRight: 5,
+    backgroundColor: '$redColor',
+    flex: 1,
   },
 
 });

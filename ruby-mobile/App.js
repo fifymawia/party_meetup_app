@@ -5,12 +5,14 @@ import * as Font from 'expo-font';
 // import { Text } from 'react-native';
 import EStylesheet from 'react-native-extended-stylesheet';
 import Colors from './constants/Colors';
+
 import Root from './src/Routes';
 // import { HomeScreen } from './src/screens';
 // import { cachedFonts } from './helpers';
 
 // import colors
 EStylesheet.build(Colors);
+
 
 export default class App extends React.Component {
  state = {

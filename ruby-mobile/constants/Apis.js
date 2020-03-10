@@ -36,19 +36,18 @@ export const createGroup = async newGroup => {
 
 }
 // //api to fetch groups where user is the admin
+
 // export class GetUsersGroups {
 //     constructor() {
-//         this.fakeUserId = "5e6118a05dc54415086af3d6";
-
-//         this.groupsPath = `groups/${this.admin}/members`;
+//         this.userId = "5e653d619ec93e29680685fc";
+//         this.userspath = `/users`;
 //     }
 
-//     async fetchUsersGroups() {
-//         const { data } = await axios.get(this.groupsPath);
-//         return data.members;
+//     async fetchusersGroup() {
+//         const { data } = await axios.get(this.userspath);
+//         return data.groups;
 //     }
 // }
-
 
 //api for adding members to a group
 export const addMembers = async addNewMember => {

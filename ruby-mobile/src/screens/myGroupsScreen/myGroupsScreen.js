@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Button, Form} from 'native-base';
+import { View, Text, Image } from 'react-native';
+import { Button, Form } from 'native-base';
+
 
 
 
@@ -13,6 +14,7 @@ class myGroupsScreen extends Component {
 
         return (
             <View  style={{ marginTop: 350 }}>
+
                 <View>
 
                     <Button block danger

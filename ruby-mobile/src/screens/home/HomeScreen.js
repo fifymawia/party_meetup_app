@@ -4,8 +4,8 @@ import { View, Text, Alert, Image } from 'react-native';
 import { ContributionApi } from '../../../constants/Apis';
 import styles from './styles/HomeScreen';
 import { LoadingScreen } from '../../commons';
-import { Button } from 'native-base';
-// import { images } from '../../../assets/Images';
+import { Button, Card, CardItem, Icon } from 'native-base';
+
 
 // import AsyncStorage from '@react-native-community/async-storage';
 import { AsyncStorage } from 'react-native';
@@ -89,34 +89,57 @@ class HomeScreen extends Component {
       }
       return (
         <View style={styles.root}>
+
          <View style={styles.topContainer}>
 
-            <Text>HomeScreen</Text>
-        
+              {/* <Icon name="menu" style={{position: 'absolute'}} /> */}
+
+          <Card style={{ alignSelf: 'center', marginTop: 200, width: 280 }}>
+            <CardItem header button onPress={() => alert("This is Card Header")}>
+              <Text>Name</Text>
+            </CardItem>
+            <CardItem footer button onPress={() => alert("This is Card Footer")}>
+              <Text>Profile</Text>
+            </CardItem>
+            <CardItem footer button onPress={() => alert("This is Card Footer")}>
+              <Text>image</Text>
+            </CardItem>
+          </Card>
           </View>
           <View>
-              <Button block light style={{ marginBottom: 25 }}
+
+              <Button block light style={{ marginTop: 80 , borderRadius: 20}}
               onPress = { this.FunctionToOpenGroupActivity }
               //onPress={() => Alert.alert('Are you sure you want to create an account?')}
               >
-                  <Text>Create New Group</Text>
+                  <Text style={styles.buttonText}>Create New Group</Text>
               </Button>
           </View>
           <View>
-              <Button block light style={{ marginBottom: 20 }}
+              <Button block light style={{ marginBottom: 5, marginTop: 5, borderRadius: 20 }}
               onPress = { this.FunctionToOpenMyGroups }
               >
-                  <Text>savings</Text>
+                  <Text style={styles.buttonText}>savings</Text>
               </Button>
           </View>
           <View>
-              <Button block light style={{ marginTop: 5 }}
-              style={{ marginBottom: 15 }}
+              <Button block light style={{ marginTop: 5 ,borderRadius: 20 }}
+
               onPress = { this.FunctionToOpenMyGroups }
               >
-                  <Text>Activities and Progress</Text>
+                  <Text style={styles.buttonText}>Activities and Progress</Text>
               </Button>
           </View>
+          <View>
+              <Button block light style={{ marginTop: 5 ,marginBottom:5, borderRadius: 20 }}
+
+              onPress = { this.FunctionToOpenMyGroups }
+              >
+                  <Text style={styles.buttonText}>Members Verification</Text>
+              </Button>
+          </View>
+
+
 {/*
           <View style={styles.bottomContainer}>
             <MyContributionsList contributions={this.state.contributions} />
