@@ -18,6 +18,26 @@ const styles = EStyleSheet.create({
     // backgroundColor: '$blackBlueColor',
 
   },
+  buttonStyle: {
+    marginTop: 20 ,
+    borderRadius: 20,
+
+  },
+  buttonText: {
+    color: '$whiteColor',
+    fontWeight: 'bold',
+    textAlign: 'center',
+   alignItems: 'center',
+   justifyContent: 'center',
+
+  },
+  groupList: {
+    color: '$whiteColor',
+    fontWeight: 'bold',
+    textAlign: 'center',
+   alignItems: 'center',
+   justifyContent: 'center',
+  }
 
 });
 export default styles;

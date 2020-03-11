@@ -5,7 +5,7 @@ const { check, validationResult } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const authCheck = require('../../utils/authCheck');
-const { Group } = require('../groups/model');
+const Group = require('../groups/model');
 
 // const UsersController = require('./controller');
 
@@ -153,6 +153,7 @@ router.post(
           if (err) throw err;
           res.status(200).json({
             token,
+            firstName: user.firstName,
           });
         }
       );
@@ -180,8 +181,8 @@ router.get('/me', authCheck, async (req, res) => {
   }
 });
 
-// // get all groups where user is an admin
-router.get('/users', authCheck, async (req, res) => {
+// get all groups where user is an admin
+router.get('/me/groups', authCheck, async (req, res) => {
   try {
     const admin = await Group.find({ admin: req.user.id });
     res.json(admin);

@@ -6,6 +6,7 @@ import * as Font from 'expo-font';
 import EStylesheet from 'react-native-extended-stylesheet';
 import Colors from './constants/Colors';
 
+
 import Root from './src/Routes';
 // import { HomeScreen } from './src/screens';
 // import { cachedFonts } from './helpers';

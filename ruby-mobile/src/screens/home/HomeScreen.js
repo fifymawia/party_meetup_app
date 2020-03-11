@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, Alert, Image } from 'react-native';
 //import { MyContributionsList } from './components';
-import { ContributionApi } from '../../../constants/Apis';
+import { ContributionApi, GetUsersGroups } from '../../../constants/Apis';
 import styles from './styles/HomeScreen';
+// import { } from '../../../constants/Apis';
 import { LoadingScreen } from '../../commons';
 import { Button, Card, CardItem, Icon } from 'native-base';
 
@@ -18,16 +19,19 @@ export const retrieveToken = async () => {
     }
   }
 
-
+const  getUsersGroups = new GetUsersGroups();
 const contributionApi = new ContributionApi();
+
 
 class HomeScreen extends Component {
   static defaultProps = {
     contributionApi,
+    getUsersGroups,
   }
     state = {
       loading: false,
       contributions: [],
+      groups: [],
     }
     async componentDidMount() {
       this.setState({ loading: true });
@@ -62,6 +66,8 @@ class HomeScreen extends Component {
             Alert.alert('error saving');
         }
         //checks groups where user is admin
+
+
         // fetches
 
 
@@ -82,6 +88,7 @@ class HomeScreen extends Component {
 
 
     render() {
+        console.log(this.props.route)
       if (this.state.loading) {
         return (
           <LoadingScreen />
@@ -91,8 +98,6 @@ class HomeScreen extends Component {
         <View style={styles.root}>
 
          <View style={styles.topContainer}>
-
-              {/* <Icon name="menu" style={{position: 'absolute'}} /> */}
 
           <Card style={{ alignSelf: 'center', marginTop: 200, width: 280 }}>
             <CardItem header button onPress={() => alert("This is Card Header")}>

@@ -3,6 +3,7 @@ import { View, Text, TextInput } from 'react-native';
 import { Form, Button, Item } from 'native-base';
 import PasswordInputText from 'react-native-hide-show-password-input';
 import ValidationComponent from 'react-native-form-validator';
+import  styles  from '../landingScreen/styles/landingScreen';
 
 
 import { signup } from '../../../constants/Apis';
@@ -82,20 +83,20 @@ onChangepassword(e) {
 
         return (
             <View>
-               <View style={{marginTop: 10, alignItems: 'center' }}>
+               <View style={{marginTop: 30, alignItems: 'center' }}>
                 <Text style={{fontSize: 30}}>Sign Up Here
                 </Text>
                 </View>
 
-                <View style={{ marginTop: 20 }}>
+                <View style={{ marginTop: 100 }}>
                  <Form>
                 <Item>
-                     <TextInput placeholder="First Name" value={this.state.firstName} onChangeText={this.onChangefirstName}  />
+                     <TextInput placeholder="First Name" value={this.state.firstName} onChangeText={this.onChangefirstName}  style={{ marginTop: 20 }} />
                      {this.isFieldInError('firstName') && this.getErrorsInField('firstName').map(errorMessage => <Text>{errorMessage}</Text>) }
 
                  </Item>
                  <Item>
-                     <TextInput placeholder="Last Name" value={this.state.lastName} onChangeText={this.onChangelastName} />
+                     <TextInput placeholder="Last Name" value={this.state.lastName} onChangeText={this.onChangelastName} style={{ marginTop: 20 }}/>
                      {this.isFieldInError('lastName') && this.getErrorsInField('lastName').map(errorMessage => <Text>{errorMessage}</Text>) }
 
                      </Item>
@@ -103,21 +104,21 @@ onChangepassword(e) {
                      <Input placeholder="Email (Optional)" value={this.state.email} onChange={this.onChangeemail} />
                      </Item> */}
                 <Item>
-                     <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber} />
+                     <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber} style={{ marginTop: 20 }}/>
                      {this.isFieldInError('phoneNumber') && this.getErrorsInField('phoneNumber').map(errorMessage => <Text>{errorMessage}</Text>) }
 
               </Item>
 
-              <PasswordInputText placeholder="Password" value={this.state.password} onChangeText={this.onChangepassword} />
+              <PasswordInputText  value={this.state.password} onChangeText={this.onChangepassword} style={{ marginTop: 10 }} />
               {this.isFieldInError('password') && this.getErrorsInField('password').map(errorMessage => <Text>{errorMessage}</Text>) }
 
                     <View>
                     <Button block danger
-                    style={{ marginTop: 50}}
+                    style={{ marginTop: 50, borderRadius: 20 }}
                    // disabled = {this._checkIfButtonNextDisabled()}
                     onPress = {this.FunctionToSubmitData}
                     >
-                        <Text>Sign Up</Text>
+                        <Text style={styles.buttonText}>Sign Up</Text>
                     </Button>
                 </View>
                  </Form>

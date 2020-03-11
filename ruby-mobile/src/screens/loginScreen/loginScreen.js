@@ -6,6 +6,7 @@ import PasswordInputText from 'react-native-hide-show-password-input';
 import ValidationComponent from 'react-native-form-validator';
 // import AsyncStorage from '@react-native-community/async-storage';
 import { AsyncStorage } from 'react-native';
+import  styles  from '../landingScreen/styles/landingScreen';
 
 export const saveToken = async token => {
     try {
@@ -64,7 +65,7 @@ class loginScreen extends ValidationComponent {
             console.log('>>> Login Token',loguser.token);
             // this.setState({ token })
 
-            this.props.navigation.navigate('Home')
+            this.props.navigation.navigate('Home', {name: loguser.firstName})
         } else {
             if (loguser.message) {
                 Alert.alert(
@@ -82,31 +83,31 @@ class loginScreen extends ValidationComponent {
 
         return (
             <View>
-                <View style={{ marginTop: 10, alignItems: 'center' }}>
+                <View style={{ marginTop: 30, alignItems: 'center' }}>
                     <Text style={{ fontSize: 30 }}>Login Here
                 </Text>
                 </View>
 
-                <View style={{ marginTop: 20 }}>
+                <View style={{ marginTop: 250 }}>
                     <Form>
 
-                        <Item>
+                        <Item style={{ marginTop: 20 }}>
                             <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber}
                             />
                             {this.isFieldInError('phoneNumber') && this.getErrorsInField('phoneNumber').map(errorMessage => <Text>{errorMessage}</Text>)}
 
-                        </Item>
-                        <PasswordInputText placeholder="Password" value={this.state.password} onChangeText={this.onChangepassword} />
+                        </Item >
+                        <PasswordInputText value={this.state.password} onChangeText={this.onChangepassword} style={{ marginTop: 20 }}/>
                         {this.isFieldInError('password') && this.getErrorsInField('password').map(errorMessage => <Text>{errorMessage}</Text>)}
 
 
                         <View>
                             <Button block danger
-                                style={{ marginTop: 50 }}
+                                    style={{ marginTop: 50, borderRadius: 20 }}
 
                                 onPress={this.FunctionToSubmitLogins}
                             >
-                                <Text>Login</Text>
+                                <Text style={styles.buttonText}>Login</Text>
                             </Button>
                         </View>
                     </Form>

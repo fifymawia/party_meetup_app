@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
-import { Button, Form} from 'native-base';
-
+import { View, Text, Image } from 'react-native';
+import { Button, Form } from 'native-base';
+import styles from './styles/landingScreen';
 
 
 
@@ -9,40 +9,37 @@ class loginScreen extends Component {
 
 
 
-      FunctionToOpenLoginActivity = () =>
-      {
-         this.props.navigation.navigate('Login');
+    FunctionToOpenLoginActivity = () => {
+        this.props.navigation.navigate('Login');
 
-      }
-      FunctionToOpenSignUpActivity = () =>
-      {
-         this.props.navigation.navigate('Sign Up');
+    }
+    FunctionToOpenSignUpActivity = () => {
+        this.props.navigation.navigate('Sign Up');
 
-      }
+    }
 
 
     render() {
 
         return (
-            <View  style={{ marginTop: 350 }}>
+            <View style={{ marginTop: 400 }}>
                 <View>
 
                     <Button block danger
-                        style={{ marginTop: 50 }}
-                        // disabled = {this._checkIfButtonNextDisabled()}
+                    style={styles.buttonStyle}
                         onPress={this.FunctionToOpenLoginActivity}
                     >
-                        <Text>Login</Text>
+                        <Text style={styles.buttonText}>Login</Text>
                     </Button>
                 </View>
 
                 <View>
-                    <Button
-                        style={{ marginTop: 50, color:'$redColor'}}
+                    <Button block danger
+                     style={styles.buttonStyle}
                         // disabled = {this._checkIfButtonNextDisabled()}
                         onPress={this.FunctionToOpenSignUpActivity}
                     >
-                        <Text>Sign Up</Text>
+                        <Text style={styles.buttonText}>Sign Up</Text>
                     </Button>
                 </View>
             </View>

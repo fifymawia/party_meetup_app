@@ -1,7 +1,7 @@
 // local imgs
-const Logo = require('../assets/Images/Logo.png');
+// const Logo = require('../assets/Images/Logo.png');
 
-export default {
+// export default {
 
-    Logo
-}
+//     Logo
+// }
