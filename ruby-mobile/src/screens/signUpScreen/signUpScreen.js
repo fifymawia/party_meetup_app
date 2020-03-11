@@ -91,12 +91,12 @@ onChangepassword(e) {
                 <View style={{ marginTop: 100 }}>
                  <Form>
                 <Item>
-                     <TextInput placeholder="First Name" value={this.state.firstName} onChangeText={this.onChangefirstName}  style={{ marginTop: 20 }} />
+                     <TextInput placeholder="First Name" value={this.state.firstName} onChangeText={this.onChangefirstName}  style={{ marginTop: 20 , width: '100%'}} />
                      {this.isFieldInError('firstName') && this.getErrorsInField('firstName').map(errorMessage => <Text>{errorMessage}</Text>) }
 
                  </Item>
                  <Item>
-                     <TextInput placeholder="Last Name" value={this.state.lastName} onChangeText={this.onChangelastName} style={{ marginTop: 20 }}/>
+                     <TextInput placeholder="Last Name" value={this.state.lastName} onChangeText={this.onChangelastName} style={{ marginTop: 20 , width: '100%'}}/>
                      {this.isFieldInError('lastName') && this.getErrorsInField('lastName').map(errorMessage => <Text>{errorMessage}</Text>) }
 
                      </Item>
@@ -104,12 +104,12 @@ onChangepassword(e) {
                      <Input placeholder="Email (Optional)" value={this.state.email} onChange={this.onChangeemail} />
                      </Item> */}
                 <Item>
-                     <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber} style={{ marginTop: 20 }}/>
+                     <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber} style={{ marginTop: 20 , width: '100%'}}/>
                      {this.isFieldInError('phoneNumber') && this.getErrorsInField('phoneNumber').map(errorMessage => <Text>{errorMessage}</Text>) }
 
               </Item>
 
-              <PasswordInputText  value={this.state.password} onChangeText={this.onChangepassword} style={{ marginTop: 10 }} />
+              <PasswordInputText  value={this.state.password} onChangeText={this.onChangepassword} style={{ marginTop: 10 , width: '100%'}} />
               {this.isFieldInError('password') && this.getErrorsInField('password').map(errorMessage => <Text>{errorMessage}</Text>) }
 
                     <View>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, Text, Image, TextInput } from 'react-native';
 import { Button, Form } from 'native-base';
 import { GetUsersGroups } from '../../../constants/Apis';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const getUsersGroups = new GetUsersGroups();
 
@@ -26,21 +25,23 @@ class myGroupsScreen extends Component {
         console.log(groups);
     }
 
-    FunctionToOpenGroupContributions = () => {
-        this.props.navigation.navigate('Record Contributions');
-       
-    }
-
     render() {
 
         return (
-            <View style={{ marginTop: 100 }}>
+
+
+            <View style={{marginTop: 50  }}>
+                <View style={{ marginBottom: 80 }}><Text style={{ textAlign: 'center' , fontWeight: 'bold', fontSize: 20}}>Select a Group</Text></View>
                 {this.state.groups.map((group, i) => (
 
                     <View key={i}>
-                <Button block light style={{marginTop:5, borderRadius: 20}}
-                onPress={this.FunctionToOpenGroupContributions}>
-                    <Text style={{ color: '$whiteColor',
+                <Button block light style={{marginTop:20, borderRadius: 20}}
+                onPress={() => this.props.navigation.navigate('Record Contributions',
+                { groupId: group._id })}
+
+               >
+
+                    <Text style={{ color: '#BF2500',
                         fontWeight: 'bold',
                         textAlign: 'center',
                         alignItems: 'center',}}>

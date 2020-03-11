@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const fakeGroupId = '5e653d619ec93e29680685fc';
 
-axios.defaults.baseURL = 'https://cba08dfb.ngrok.io/api';
+axios.defaults.baseURL = 'https://30a3e284.ngrok.io/api';
 import { AsyncStorage } from 'react-native';
 // sign up api
 export const signup = user => {
@@ -83,8 +83,8 @@ export const addContribution = async addNewContribution => {
 //api for getting Group Members for a contribution
 export class GetMembers {
     constructor() {
-        // this.groupId = "5e653d619ec93e29680685fc";
-        this.memberspath = `groups/groupId/members`;
+       this.groupId = "5e653d619ec93e29680685fc";
+        this.memberspath = `groups/${this.groupId}/members`;
     }
 
     async fetchGroupMembers() {

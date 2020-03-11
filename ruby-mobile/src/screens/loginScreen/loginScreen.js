@@ -92,12 +92,12 @@ class loginScreen extends ValidationComponent {
                     <Form>
 
                         <Item style={{ marginTop: 20 }}>
-                            <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber}
+                            <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber} style={{ marginTop: 20 , width: '100%'}}
                             />
                             {this.isFieldInError('phoneNumber') && this.getErrorsInField('phoneNumber').map(errorMessage => <Text>{errorMessage}</Text>)}
 
                         </Item >
-                        <PasswordInputText value={this.state.password} onChangeText={this.onChangepassword} style={{ marginTop: 20 }}/>
+                        <PasswordInputText value={this.state.password} onChangeText={this.onChangepassword} style={{ marginTop: 20, width: '100%' }}/>
                         {this.isFieldInError('password') && this.getErrorsInField('password').map(errorMessage => <Text>{errorMessage}</Text>)}
 
 

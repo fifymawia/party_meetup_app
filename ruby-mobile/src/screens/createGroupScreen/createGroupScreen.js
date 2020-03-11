@@ -93,31 +93,31 @@ class createGroupScreen extends ValidationComponent {
     render() {
         return (
             <View>
-                <View style={{ marginTop: 10, alignItems: 'center' }}>
-                    <Text style={{ fontSize: 30 }}>Group Setup Info
+                <View style={{ marginTop: 20, alignItems: 'center' }}>
+                    <Text style={{ fontSize: 20 ,color:'#BF2500'}} >Group Setup Info
                 </Text>
                 </View>
                 <View style={{ marginTop: 20 }}>
 
                     <Form>
                         <Item>
-                            <TextInput placeholder=" Group Name" value={this.state.name} onChangeText={this.onChangename} />
+                            <TextInput placeholder="Enter Group Name" value={this.state.name} onChangeText={this.onChangename} style={{ marginTop: 20, width: '100%' }}/>
                             {this.getErrorsInField('name').map(errorMessage => <Text>{errorMessage}</Text>)}
 
 
                         </Item>
                         <Item >
-                            <TextInput placeholder="Group Description" value={this.state.description} onChangeText={this.onChangedescription} />
+                            <TextInput placeholder="Enter Group Description" value={this.state.description} onChangeText={this.onChangedescription} style={{ marginTop: 20 , width: '100%'}} />
                             {this.getErrorsInField('description').map(errorMessage => <Text>{errorMessage}</Text>)}
 
                         </Item>
                         <Item last>
-                            <TextInput placeholder="Group Account Number" value={this.state.bankAccount} onChangeText={this.onChangebankAccount} />
+                            <TextInput placeholder="Enter Group Account Number" value={this.state.bankAccount} onChangeText={this.onChangebankAccount}style={{ marginTop: 20, width: '100%' }} />
                             {this.getErrorsInField('bankAccount').map(errorMessage => <Text>{errorMessage}</Text>)}
 
                         </Item>
                         <View>
-                            <Text style={{ marginTop: 10, marginLeft: 60, fontSize: 20 }}>Select Contribution Frequency
+                            <Text style={{ marginTop: 30, marginLeft: 60, fontSize: 20 ,color:'#BF2500'}}>Select Contribution Frequency
                 </Text>
 
                         </View>
@@ -140,12 +140,12 @@ class createGroupScreen extends ValidationComponent {
                             </Picker>
                         </Item>
                         <Item style={{ marginTop: 15 }}>
-                            <TextInput placeholder="Amount Per Contribution" value={this.state.amount} onChangeText={this.onChangeamount} />
+                            <TextInput placeholder="Amount Per Contribution" value={this.state.amount} onChangeText={this.onChangeamount} style={{ width: '100%', marginTop: 20 }} />
                             {this.getErrorsInField('amount').map(errorMessage => <Text>{errorMessage}</Text>)}
 
                         </Item>
                         <View>
-                            <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20 }}>Select Proposed Start Date
+                            <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20,color:'#BF2500' }}>Select Proposed Start Date
                 </Text>
                         </View>
 
@@ -177,7 +177,7 @@ class createGroupScreen extends ValidationComponent {
 
                         <View>
                             <Button block danger
-                                style={{ marginTop: 50 }}
+                                style={{ marginTop: 30, borderRadius: 20}}
                                 onPress={this.FunctionToOpenMembersActivity}
                             >
                                 <Text>Next</Text>

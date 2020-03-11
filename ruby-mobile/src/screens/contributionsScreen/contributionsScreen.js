@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'native-base';
-import { GetMembers } from '../../../constants/Apis';
+import { GetMembers, addContribution } from '../../../constants/Apis';
 // import styles from '../home/components/styles/MyContributionsList';
 // new
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
@@ -82,7 +82,7 @@ console.log(this.state.addpaidMembers);
 
             <View>
 
-                <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20 }}>Verify Members Contributions</Text>
+                <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20, color: '#BF2500', }}>Verify Members Contributions</Text>
                 <View>
                     <ScrollView>
                         <View>
@@ -150,9 +150,9 @@ console.log(this.state.addpaidMembers);
 
 const styles = StyleSheet.create({
     container: { flex: 1, padding: 16, paddingTop: 30, backgroundColor: '#fff' },
-    head: { height: 40, backgroundColor: '#808B97' },
+    head: { height: 40, backgroundColor: '#384259' },
     text: { margin: 6 },
-    row: { flexDirection: 'row', backgroundColor: '#FFF1C1' },
+    row: { flexDirection: 'row' },
     btn: { width: 58, height: 18, backgroundColor: '#78B7BB', borderRadius: 2 },
     btnText: { textAlign: 'center', color: '#fff' }
 });
