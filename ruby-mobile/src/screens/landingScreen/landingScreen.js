@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import { Button, Form } from 'native-base';
 import styles from './styles/landingScreen';
+const logo = require(
+    '../../../assets/images/logo.png'
+)
 
 
 
@@ -23,8 +26,9 @@ class loginScreen extends Component {
 
         return (
             <View style={{ marginTop: 400 }}>
-                <View>
 
+                <View>
+                <Image style={{width: 10, height: 10}} source={logo}/>
                     <Button block danger
                     style={styles.buttonStyle}
                         onPress={this.FunctionToOpenLoginActivity}

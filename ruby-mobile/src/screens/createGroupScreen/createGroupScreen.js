@@ -175,9 +175,9 @@ class createGroupScreen extends ValidationComponent {
                             onDateChange={(proposedDate) => { this.setState({ proposedDate: proposedDate }) }}
                         />
 
-                        <View>
+                        <View >
                             <Button block danger
-                                style={{ marginTop: 30, borderRadius: 20}}
+                                style={{ marginTop: 30, borderRadius: 20, width: '100%' }}
                                 onPress={this.FunctionToOpenMembersActivity}
                             >
                                 <Text>Next</Text>

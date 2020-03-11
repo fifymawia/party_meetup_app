@@ -80,15 +80,15 @@ export const addContribution = async addNewContribution => {
 
 }
 
-//api for getting Group Members for a contribution
+//api for getting Group Members Using groupId for a contribution
 export class GetMembers {
     constructor() {
-       this.groupId = "5e653d619ec93e29680685fc";
-        this.memberspath = `groups/${this.groupId}/members`;
+       //this.groupId = "5e653d619ec93e29680685fc";
+        // this.memberspath = `groups/${this.groupId}/members`;
     }
 
-    async fetchGroupMembers() {
-        const { data } = await axios.get(this.memberspath);
+    async fetchGroupMembers(id) {
+        const { data } = await axios.get(`groups/${id}/members`);
         return data.members;
     }
 }

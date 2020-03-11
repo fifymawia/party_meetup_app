@@ -26,11 +26,13 @@ export default class contributionsScreen extends Component {
     }
 
 
-
-
     async componentDidMount() {
+        console.log(this.props)
+        const { params } = this.props.route;
+        const groupId = params ? params.groupId : null;
+        console.log(groupId);
         this.setState({ loading: true });
-        const members = await this.props.getMembers.fetchGroupMembers();
+        const members = await this.props.getMembers.fetchGroupMembers(groupId);
         this.setState({ loading: false, groupMembers: members.members });
         // console.log(this.state.groupmembers);
 
@@ -54,6 +56,7 @@ export default class contributionsScreen extends Component {
 
 
     render() {
+
         const state = this.state;
         const element = (rowData, index) => (
             <TouchableOpacity    onPress={e => {
