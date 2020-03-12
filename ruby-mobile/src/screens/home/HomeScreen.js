@@ -74,17 +74,11 @@ class HomeScreen extends Component {
 
         }
 
-    // FunctionToOpenContributionsActivity = async () => {
-    //     // @TODO: fetch/get/read token
-    //     const token = await retrieveToken();
-    //         if (token !== null) {
-    //             this.setState({ token });
-    //             console.log('>>> Login Token At Homescreen', token);
-    //             this.props.navigation.navigate('Record Contributions');
-    //         } else{
-    //             Alert.alert('error saving');
-    //         }
-    //     }
+    FunctionToOpenMyMyActivities = async () => {
+
+                this.props.navigation.navigate('Activities');
+
+        }
 
 
     render() {
@@ -130,7 +124,7 @@ class HomeScreen extends Component {
           <View>
               <Button block light style={{ marginTop: 5 ,borderRadius: 20 }}
 
-              onPress = { this.FunctionToOpenMyGroups }
+              onPress = { this.FunctionToOpenMyMyActivities }
               >
                   <Text style={styles.buttonText}>Activities and Progress</Text>
               </Button>

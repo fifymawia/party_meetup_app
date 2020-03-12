@@ -59,21 +59,21 @@ export default class contributionsScreen extends Component {
 
         const state = this.state;
         const element = (rowData, index) => (
-            <TouchableOpacity    onPress={e => {
+            <TouchableOpacity onPress={e => {
 
-            const addpaidMember = { name: rowData.name, phone: rowData.phoneNumber };
-            let addpaidMembers = [];
-            let memberPaid = state.addpaidMembers.find(x => x.phone === addpaidMember.phone);
-            if (memberPaid) {
-                addpaidMembers = state.addpaidMembers.filter(m => m.name !== addpaidMember.name);
-            } else {
-                addpaidMembers = [...state.addpaidMembers, addpaidMember];
-            }
+                const addpaidMember = { name: rowData.name, phone: rowData.phoneNumber };
+                let addpaidMembers = [];
+                let memberPaid = state.addpaidMembers.find(x => x.phone === addpaidMember.phone);
+                if (memberPaid) {
+                    addpaidMembers = state.addpaidMembers.filter(m => m.name !== addpaidMember.name);
+                } else {
+                    addpaidMembers = [...state.addpaidMembers, addpaidMember];
+                }
 
-            this.setState({addpaidMembers});
-console.log(this.state.addpaidMembers);
-           // pressed = {Paid(groupmembers, {name: rowData.name, phoneNumber.number})
-        }}>
+                this.setState({ addpaidMembers });
+                console.log(this.state.addpaidMembers);
+                // pressed = {Paid(groupmembers, {name: rowData.name, phoneNumber.number})
+            }}>
 
                 <View style={styles.btn}>
                     <Text style={styles.btnText}>{this.Paid(rowData) ? "Paid" : "Not Paid"}</Text>
@@ -83,70 +83,72 @@ console.log(this.state.addpaidMembers);
         // map group.members.name and group.members.phoneNumber
         return (
 
-            <View>
+            <View style={{ marginBottom: 20, flex: 1 }}>
 
                 <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20, color: '#BF2500', }}>Verify Members Contributions</Text>
-                <View>
-                    <ScrollView>
-                        <View>
+                <ScrollView><View>
 
-                            <Table borderStyle={{ borderColor: 'transparent' }}>
-                                <Row data={state.tableHead} style={styles.head} textStyle={styles.text} />
-                                {
-                                    state.groupMembers.map((rowData, index) => (
-                                        <TableWrapper key={index} style={styles.row}>
-                                            {
-                                                //   map name
-                                                <Cell  data={index === state.groupMembers.length ? element(rowData, index) : [rowData.name]} textStyle={styles.text} />
-                                                //   ))
-                                            }
-                                            {
-                                                //   map phone number
-                                                <Cell  data={index === state.groupMembers.length ? element(rowData, index) : [rowData.phoneNumber]} textStyle={styles.text} />
-                                                //   ))
-                                            }
-                                            {
-                                                //   touchableopacity
-                                                <Cell  data={index === index ? element(rowData, index) : []} textStyle={styles.text} />
-                                                //   ))
-                                            }
-                                        </TableWrapper>
-                                    ))
+                    <View>
+
+                        <Table borderStyle={{ borderColor: 'transparent' }}>
+                            <Row data={state.tableHead} style={styles.head} textStyle={styles.text} />
+                            {
+                                state.groupMembers.map((rowData, index) => (
+                                    <TableWrapper key={index} style={styles.row}>
+                                        {
+                                            //   map name
+                                            <Cell data={index === state.groupMembers.length ? element(rowData, index) : [rowData.name]} textStyle={styles.text} />
+                                            //   ))
+                                        }
+                                        {
+                                            //   map phone number
+                                            <Cell data={index === state.groupMembers.length ? element(rowData, index) : [rowData.phoneNumber]} textStyle={styles.text} />
+                                            //   ))
+                                        }
+                                        {
+                                            //   touchableopacity
+                                            <Cell data={index === index ? element(rowData, index) : []} textStyle={styles.text} />
+                                            //   ))
+                                        }
+                                    </TableWrapper>
+                                ))
+                            }
+                        </Table>
+
+                    </View>
+
+
+
+                    <View>
+                        <Button block danger
+                            onPress={async e => {
+                                const chosenMembers = this.state.addpaidMembers.map(addpaidMember => ({
+                                    name: addpaidMember.name,
+                                    phoneNumber: addpaidMember.phoneNumber
+                                }));
+                                const results = await Promise.all(chosenMembers.map(m => addContribution({
+                                    ...m,
+                                    groupId: this.props.route.params.groupId
+                                })));
+                                if (results) {
+                                    this.props.navigation.navigate('Home');
+                                } else {
+                                    if (results.message) {
+                                        Alert.alert(
+                                            'oopps'
+                                        );
+                                    }
+
                                 }
-                            </Table>
-
-                        </View>
-
-                    </ScrollView>
-                </View>
-                <Button block danger
-                onPress={async e => {
-                    const chosenMembers = this.state.addpaidMembers.map(addpaidMember=>({
-                       name: addpaidMember.name,
-                        phoneNumber: addpaidMember.phoneNumber
-                    }));
-                    const results = await Promise.all(chosenMembers.map(m => addContribution({
-                        ...m,
-                        groupId: route.params.groupId
-                    })));
-                    if (results) {
-                        this.props.navigation.navigate('Home');
-                    } else {
-                        if (results.message) {
-                            Alert.alert(
-                                'oopps'
-                            );
-                        }
-
-                    }
 
 
 
-                }}>
-                    <Text>Submit</Text>
-                </Button>
+                            }}>
+                            <Text>Submit</Text>
+                        </Button>
 
-            </View>
+                    </View>
+                </View></ScrollView></View>
         )
     }
 }

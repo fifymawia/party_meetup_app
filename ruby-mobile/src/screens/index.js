@@ -9,3 +9,4 @@ export * from './loginScreen';
 export * from './landingScreen';
 export * from './contributionsScreen';
 export * from './myGroupsScreen';
+export * from './activityScreen';

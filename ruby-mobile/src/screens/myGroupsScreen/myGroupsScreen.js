@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TextInput } from 'react-native';
 import { Button, Form } from 'native-base';
 import { GetUsersGroups } from '../../../constants/Apis';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const getUsersGroups = new GetUsersGroups();
 
@@ -30,8 +31,11 @@ class myGroupsScreen extends Component {
         return (
 
 
-            <View style={{marginTop: 50  }}>
-                <View style={{ marginBottom: 80 }}><Text style={{ textAlign: 'center' , fontWeight: 'bold', fontSize: 20}}>Select a Group</Text></View>
+            <View style={{marginTop: 5,  flex: 1, justifyContent: 'center',
+                // backgroundColor: '$blackBlueColor',
+           }}>
+               <ScrollView>
+                <View style={{ marginBottom: 60 }}><Text style={{ textAlign: 'center' , fontWeight: 'bold', fontSize: 20}}>Select a Group</Text></View>
                 {this.state.groups.map((group, i) => (
 
                     <View key={i}>
@@ -51,6 +55,7 @@ class myGroupsScreen extends Component {
                     </View>
 
                 ))}
+                </ScrollView>
              </View>
         )}
 

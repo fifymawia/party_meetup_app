@@ -25,12 +25,12 @@ class loginScreen extends Component {
     render() {
 
         return (
-            <View style={{ marginTop: 400 }}>
+            <View style={{ marginTop: 30, flex: 1 }}>
+                <Image style={{ width: 300, height: 200, alignSelf: 'center', }} source={logo} />
 
-                <View>
-                <Image style={{width: 10, height: 10}} source={logo}/>
+                <View style={{ marginTop: '55%' }}>
                     <Button block danger
-                    style={styles.buttonStyle}
+                        style={styles.buttonStyle}
                         onPress={this.FunctionToOpenLoginActivity}
                     >
                         <Text style={styles.buttonText}>Login</Text>
@@ -39,7 +39,7 @@ class loginScreen extends Component {
 
                 <View>
                     <Button block danger
-                     style={styles.buttonStyle}
+                        style={styles.buttonStyle}
                         // disabled = {this._checkIfButtonNextDisabled()}
                         onPress={this.FunctionToOpenSignUpActivity}
                     >

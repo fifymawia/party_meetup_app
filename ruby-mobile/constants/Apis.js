@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const fakeGroupId = '5e653d619ec93e29680685fc';
 
-axios.defaults.baseURL = 'https://30a3e284.ngrok.io/api';
+axios.defaults.baseURL = 'https://24dd833d.ngrok.io/api';
 import { AsyncStorage } from 'react-native';
 // sign up api
 export const signup = user => {

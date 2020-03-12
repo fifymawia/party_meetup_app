@@ -1,21 +1,24 @@
 import React from 'react';
-import { View, TextInput, Text, Alert } from 'react-native';
+import { View, TextInput, Text, Alert, Image, ImageBackground } from 'react-native';
 import { Form, Button, Item } from 'native-base';
 import { login } from '../../../constants/Apis';
 import PasswordInputText from 'react-native-hide-show-password-input';
 import ValidationComponent from 'react-native-form-validator';
 // import AsyncStorage from '@react-native-community/async-storage';
 import { AsyncStorage } from 'react-native';
-import  styles  from '../landingScreen/styles/landingScreen';
+import styles from '../landingScreen/styles/landingScreen';
+const bdimg = require(
+    '../../../assets/images/bdimg.png'
+)
 
 export const saveToken = async token => {
     try {
-      await AsyncStorage.setItem('token', token)
-    //   alert('Data successfully saved!')
+        await AsyncStorage.setItem('token', token)
+        //   alert('Data successfully saved!')
     } catch (e) {
-      alert('Failed to save token.')
+        alert('Failed to save token.')
     }
-  }
+}
 
 
 
@@ -62,10 +65,10 @@ class loginScreen extends ValidationComponent {
         if (loguser.token) {
             // @TODO store token and redirect: usign asyncStorage
             await saveToken(loguser.token);
-            console.log('>>> Login Token',loguser.token);
+            console.log('>>> Login Token', loguser.token);
             // this.setState({ token })
 
-            this.props.navigation.navigate('Home', {name: loguser.firstName})
+            this.props.navigation.navigate('Home', { name: loguser.firstName })
         } else {
             if (loguser.message) {
                 Alert.alert(
@@ -82,28 +85,32 @@ class loginScreen extends ValidationComponent {
     render() {
 
         return (
-            <View>
-                <View style={{ marginTop: 30, alignItems: 'center' }}>
-                    <Text style={{ fontSize: 30 }}>Login Here
+            <View style={{flex: 1}}>
+            <ImageBackground style={{ width: '100%', height: '100%', position: 'absolute'}} source={bdimg} />
+
+
+<View>
+                <View style={{ marginTop: '70%',  alignItems: 'center' }}>
+                    <Text style={{ fontSize: 25 }}>Login Here
                 </Text>
                 </View>
 
-                <View style={{ marginTop: 250 }}>
-                    <Form>
+                <View style={{ marginTop: '10%'}}>
+                    <Form style={{alignContent: 'center'}}>
 
                         <Item style={{ marginTop: 20 }}>
-                            <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber} style={{ marginTop: 20 , width: '100%'}}
+                            <TextInput placeholder="Phone Number" value={this.state.phoneNumber} onChangeText={this.onChangephoneNumber} style={{ marginTop: 20, width: '100%' }}
                             />
                             {this.isFieldInError('phoneNumber') && this.getErrorsInField('phoneNumber').map(errorMessage => <Text>{errorMessage}</Text>)}
 
                         </Item >
-                        <PasswordInputText value={this.state.password} onChangeText={this.onChangepassword} style={{ marginTop: 20, width: '100%' }}/>
+                        <PasswordInputText value={this.state.password} onChangeText={this.onChangepassword} style={{ marginTop: 20, width: '100%' }} />
                         {this.isFieldInError('password') && this.getErrorsInField('password').map(errorMessage => <Text>{errorMessage}</Text>)}
 
 
                         <View>
                             <Button block danger
-                                    style={{ marginTop: 50, borderRadius: 20 }}
+                                style={{ marginTop: 50, borderRadius: 20 }}
 
                                 onPress={this.FunctionToSubmitLogins}
                             >
@@ -115,7 +122,7 @@ class loginScreen extends ValidationComponent {
 
                 </View>
             </View>
-        );
+            </View> );
     }
 
 }
