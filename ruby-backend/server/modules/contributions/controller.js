@@ -5,26 +5,27 @@ const Group = require('../groups/model');
 // add contribution array to group
 
 const createGroupContribution = async (req, res) => {
-  const { title,
-    description,
+  const {
+    // title,
+    // description,
     members,
     groupId,
   } = req.body;
-  // const { groupId } = req.params;
-  if (!title) {
-    return res.status(400).json({ error: true, message: 'Title must be provided' });
-  } else if (typeof title !== 'string') {
-    return res.status(400).json({ error: true, message: 'Title must be a String' });
-  } else if (title.length < 5) {
-    return res.status(400).json({ error: true, message: 'Title must be atleast 5 characters' });
-  }
-  if (!description) {
-    return res.status(400).json({ error: true, message: 'Description must be provided' });
-  } else if (typeof description !== 'string') {
-    return res.status(400).json({ error: true, message: 'Description must be a String' });
-  } else if (description.length < 10) {
-    return res.status(400).json({ error: true, message: 'Description must be atleast 10 characters' });
-  }
+  // // const { groupId } = req.params;
+  // if (!title) {
+  //   return res.status(400).json({ error: true, message: 'Title must be provided' });
+  // } else if (typeof title !== 'string') {
+  //   return res.status(400).json({ error: true, message: 'Title must be a String' });
+  // } else if (title.length < 5) {
+  //   return res.status(400).json({ error: true, message: 'Title must be atleast 5 characters' });
+  // }
+  // if (!description) {
+  //   return res.status(400).json({ error: true, message: 'Description must be provided' });
+  // } else if (typeof description !== 'string') {
+  //   return res.status(400).json({ error: true, message: 'Description must be a String' });
+  // } else if (description.length < 10) {
+  //   return res.status(400).json({ error: true, message: 'Description must be atleast 10 characters' });
+  // }
   if (!members) {
     return res.status(400).json({ error: true, message: 'Members must be provided' });
   } else if (typeof members !== 'object') {
@@ -44,7 +45,10 @@ const createGroupContribution = async (req, res) => {
   }
 
   try {
-    const { contribution } = await Group.addContribution(groupId, { title, description, members });
+    const { contribution } = await Group.addContribution(groupId, {
+      // title,
+    // description,
+      members });
     return res.status(201).json({ error: false, contribution });
   } catch (e) {
     return res.status(400).json({ error: true, message: e.message });

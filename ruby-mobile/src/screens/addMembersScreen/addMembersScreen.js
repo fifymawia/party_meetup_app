@@ -5,7 +5,26 @@ import { View, Text } from 'react-native';
 import * as Contacts from 'expo-contacts';
 import { ScrollView } from 'react-native-gesture-handler';
 import { ListItem, CheckBox, Body, Content, Button } from 'native-base';
+import AsyncStorage from 'react-native'
 import { addMembers } from '../../../constants/Apis';
+
+
+// export const saveContacts = async contacts => {
+//     try {
+//         await AsyncStorage.setItem('contacts', contacts)
+//         //   alert('Data successfully saved!')
+//     } catch (e) {
+//         alert('Failed to save contacts.')
+//     }
+// }
+// export const contacts = async () => {
+//     try {
+//       return await AsyncStorage.getItem('contacts');
+//     } catch (e) {
+//       alert('Failed to load Contacts.')
+//     }
+//   }
+
 
 
     export default function App({ route, navigation }) {

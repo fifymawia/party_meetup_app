@@ -118,7 +118,7 @@ class HomeScreen extends Component {
               <Button block light style={{ marginBottom: 5, marginTop: 5, borderRadius: 20 }}
               onPress = { this.FunctionToOpenMyGroups }
               >
-                  <Text style={styles.buttonText}>savings</Text>
+                  <Text style={styles.buttonText}>Record Savings</Text>
               </Button>
           </View>
           <View>

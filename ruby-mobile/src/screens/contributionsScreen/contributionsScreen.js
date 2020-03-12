@@ -34,7 +34,7 @@ export default class contributionsScreen extends Component {
         this.setState({ loading: true });
         const members = await this.props.getMembers.fetchGroupMembers(groupId);
         this.setState({ loading: false, groupMembers: members.members });
-        // console.log(this.state.groupmembers);
+       console.log(members);
 
     }
 
@@ -44,7 +44,7 @@ export default class contributionsScreen extends Component {
     }
 
     Paid = (rowData) => {
-        let memberPaid = this.state.addpaidMembers.find(x => x.phone === rowData.phoneNumber);
+        let memberPaid = this.state.addpaidMembers.find(x => x.id === rowData._id);
         // console.log(memberPaid);
         if (memberPaid) {
             return true;
@@ -61,11 +61,11 @@ export default class contributionsScreen extends Component {
         const element = (rowData, index) => (
             <TouchableOpacity onPress={e => {
 
-                const addpaidMember = { name: rowData.name, phone: rowData.phoneNumber };
+                const addpaidMember = { name: rowData.name, phone: rowData.phoneNumber, id: rowData._id };
                 let addpaidMembers = [];
-                let memberPaid = state.addpaidMembers.find(x => x.phone === addpaidMember.phone);
+                let memberPaid = state.addpaidMembers.find(x => x.id === addpaidMember.id);
                 if (memberPaid) {
-                    addpaidMembers = state.addpaidMembers.filter(m => m.name !== addpaidMember.name);
+                    addpaidMembers = state.addpaidMembers.filter(m => m.id !== addpaidMember.id);
                 } else {
                     addpaidMembers = [...state.addpaidMembers, addpaidMember];
                 }
@@ -122,14 +122,11 @@ export default class contributionsScreen extends Component {
                     <View>
                         <Button block danger
                             onPress={async e => {
-                                const chosenMembers = this.state.addpaidMembers.map(addpaidMember => ({
-                                    name: addpaidMember.name,
-                                    phoneNumber: addpaidMember.phoneNumber
-                                }));
-                                const results = await Promise.all(chosenMembers.map(m => addContribution({
-                                    ...m,
+                                const chosenMembers = this.state.addpaidMembers.map(addpaidMember => addpaidMember.id);
+                                const results = await  addContribution({
+                                    members: chosenMembers,
                                     groupId: this.props.route.params.groupId
-                                })));
+                                });
                                 if (results) {
                                     this.props.navigation.navigate('Home');
                                 } else {
