@@ -94,14 +94,14 @@ class HomeScreen extends Component {
          <View style={styles.topContainer}>
 
           <Card style={{ alignSelf: 'center', marginTop: 200, width: 280 }}>
-            <CardItem header button onPress={() => alert("This is Card Header")}>
-              <Text>Name</Text>
+            <CardItem header button onPress={() => alert("You have an active session")}>
+              <Text>Jace Copua</Text>
             </CardItem>
-            <CardItem footer button onPress={() => alert("This is Card Footer")}>
-              <Text>Profile</Text>
+            <CardItem footer button onPress={() => alert("Allow Credbook To Access Your Location")}>
+              <Text>Update My Address</Text>
             </CardItem>
-            <CardItem footer button onPress={() => alert("This is Card Footer")}>
-              <Text>image</Text>
+            <CardItem footer button onPress={() => alert("Chiiiiiiiiil! This Shit Will Work Soon")}>
+              <Text>Upload MoMo Statement</Text>
             </CardItem>
           </Card>
           </View>
