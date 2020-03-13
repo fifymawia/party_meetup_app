@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const fakeGroupId = '5e653d619ec93e29680685fc';
 
-axios.defaults.baseURL = 'https://e7d171d4.ngrok.io/api';
+axios.defaults.baseURL = 'https://hidden-atoll-66913.herokuapp.com/api';
 import { AsyncStorage } from 'react-native';
 // sign up api
 export const signup = user => {

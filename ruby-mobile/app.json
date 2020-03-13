@@ -23,8 +23,10 @@
     "assetBundlePatterns": [
       "**/*"
     ],
-    "ios": {
-      "supportsTablet": true
+
+    "android": {
+        "package": "com.ruby.credbook",
+        "versionCode": 1
     }
   }
 }

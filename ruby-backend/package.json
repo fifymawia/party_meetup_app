@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "dev": "SET NODE_ENV=development nodemon index.js"
+    "dev": "SET NODE_ENV=development nodemon index.js",
+    "start": "node index.js"
   },
   "author": "Fify",
   "license": "MIT",

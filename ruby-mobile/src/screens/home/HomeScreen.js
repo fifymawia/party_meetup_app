@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Alert, Image } from 'react-native';
 //import { MyContributionsList } from './components';
-import { ContributionApi, GetUsersGroups } from '../../../constants/Apis';
+import {  GetUsersGroups } from '../../../constants/Apis';
 import styles from './styles/HomeScreen';
 // import { } from '../../../constants/Apis';
 import { LoadingScreen } from '../../commons';
@@ -20,29 +20,28 @@ export const retrieveToken = async () => {
   }
 
 const  getUsersGroups = new GetUsersGroups();
-const contributionApi = new ContributionApi();
 
 
 class HomeScreen extends Component {
   static defaultProps = {
-    contributionApi,
+
     getUsersGroups,
   }
     state = {
       loading: false,
-      contributions: [],
+
       groups: [],
     }
-    async componentDidMount() {
-      this.setState({ loading: true });
-      const contributions = await this.props.contributionApi.fetchGroupContributions();
-      this.setState({ loading: false,contributions });
-    //   setTimeout(() => this.setState({ loading: false, contributions }), 2000);
-    // AsyncStorage.getItem('token')
-    // .then(console.log)
-    // .catch(console.log)
+    // async componentDidMount() {
+    //   this.setState({ loading: true });
+    //   const contributions = await this.props.contributionApi.fetchGroupContributions();
+    //   this.setState({ loading: false,contributions });
+    // //   setTimeout(() => this.setState({ loading: false, contributions }), 2000);
+    // // AsyncStorage.getItem('token')
+    // // .then(console.log)
+    // // .catch(console.log)
 
-    }
+    // }
 
     FunctionToOpenGroupActivity = async () => {
     // @TODO: fetch/get/read token
