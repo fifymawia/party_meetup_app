@@ -3,7 +3,7 @@ const ContributionController = require('./controller');
 
 const routes = new Router();
 
-// contribution by group
+// contribution by group 
 routes.post('/contributions', ContributionController.createGroupContribution);
 routes.get('/contributions', ContributionController.getAllContributions);
 

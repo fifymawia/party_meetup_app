@@ -3,7 +3,7 @@ const GroupController = require('./controller');
 const authCheck = require('../../utils/authCheck');
 
 const routes = new Router();
-// Post a group
+// Post a group 
 routes.post('/groups', authCheck, GroupController.createGroup);
 // get all groups
 routes.get('/groups', GroupController.getAllgroups);

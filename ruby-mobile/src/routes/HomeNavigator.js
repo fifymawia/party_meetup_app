@@ -1,6 +1,6 @@
 import React from 'react';
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createGroupScreen, addMembersScreen, signUpScreen, loginScreen, landingScreen, contributionsScreen, myGroupsScreen, activityScreen } from '../screens';
+import { createGroupScreen, addMembersScreen, signUpScreen, loginScreen, landingScreen, contributionsScreen, bankAccess ,myGroupsScreen, activityScreen } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './TabNavigator';
 
@@ -44,6 +44,10 @@ export default function HomeNavigator() {
       <Home.Screen
         name="Activities"
         component={activityScreen}>
+      </Home.Screen>
+      <Home.Screen
+        name="Bank Access"
+        component={bankAccess}>
       </Home.Screen>
     </Home.Navigator>
   );

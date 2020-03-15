@@ -9,7 +9,7 @@ const createGroupMembers = async (req, res) => {
     phoneNumber,
     groupId,
   } = req.body;
-  // const { groupId } = req.params;
+  // const { groupId } = req.params; 
   if (!name) {
     return res.status(400).json({ error: true, message: 'Name must be provided' });
   } else if (typeof name !== 'string') {

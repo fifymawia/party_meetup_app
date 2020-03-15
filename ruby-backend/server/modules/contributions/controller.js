@@ -36,7 +36,7 @@ const createGroupContribution = async (req, res) => {
   if (!groupId) {
     return res.status(400).json({ error: true, message: 'GroupId must be provided' });
   }
-  // eslint-disable-next-line no-empty
+  // eslint-disable-next-line no-empty 
   const { members: groupMembers } = await Group.findById(groupId);
   const conMembers = members.filter(member => !groupMembers.includes(member));
 

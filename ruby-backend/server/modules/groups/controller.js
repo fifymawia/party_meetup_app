@@ -152,7 +152,14 @@ const getAsingleGroup = async (req, res) => {
   try {
     return res.status(200).json({
       error: false,
-      group: await Group.find({ group: groupId }).populate('group', 'name') });
+      //  // members: await Member.find({ group: groupId }).populate('group', 'name') });
+      //  members: await Group.findById(groupId).populate([
+      //   { path: 'members', model: 'Member' },
+      // ]) });
+
+      groups: await Group.findById(groupId).populate([
+        { path: 'groups' },
+      ]) });
   } catch (e) {
     return res.status(400).json({ error: true, message: e.message });
   }
@@ -195,7 +202,6 @@ const getGroupMembers = async (req, res) => {
   try {
     return res.status(200).json({
       error: false,
-
       // members: await Member.find({ group: groupId }).populate('group', 'name') });
       members: await Group.findById(groupId).populate([
         { path: 'members', model: 'Member' },

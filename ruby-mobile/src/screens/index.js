@@ -10,3 +10,4 @@ export * from './landingScreen';
 export * from './contributionsScreen';
 export * from './myGroupsScreen';
 export * from './activityScreen';
+export * from './bankAccess';
