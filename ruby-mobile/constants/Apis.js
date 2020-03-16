@@ -97,12 +97,13 @@ export class GetMembers {
 // get contributions api
 export class ContributionApi {
     constructor() {
-        this.groupId = fakeGroupId;
-        this.contributionpath = `groups/${this.groupId}/contributions`;
+       // this.groupId = fakeGroupId;
+       // this.contributionpath = `groups/${this.groupId}/contributions`;
     }
 
-    async fetchGroupContributions() {
-        const { data } = await axios.get(this.contributionpath);
+    async fetchGroupContributions(id) {
+        const { data } = await axios.get(`groups/${id}/contributions`);
+        console.log(data);
         return data.contributions;
     }
 }

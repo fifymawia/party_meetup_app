@@ -4,9 +4,10 @@ import { Button, Form } from 'native-base';
 import { GetUsersGroups } from '../../../constants/Apis';
 import { ScrollView } from 'react-native-gesture-handler';
 
+
 const getUsersGroups = new GetUsersGroups();
 
-class myGroupsScreen extends Component {
+class allgrpconts extends Component {
 
     static defaultProps = {
 
@@ -41,7 +42,7 @@ class myGroupsScreen extends Component {
 
                         <View key={i}>
                             <Button block light style={{ marginTop: 20, borderRadius: 20 }}
-                                onPress={() => this.props.navigation.navigate('Record Contributions',
+                                onPress={() => this.props.navigation.navigate('Contributions',
                                     { groupId: group._id })}
 
                             >
@@ -64,4 +65,4 @@ class myGroupsScreen extends Component {
     }
 
 }
-export default myGroupsScreen;
+export default allgrpconts;

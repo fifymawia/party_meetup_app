@@ -11,3 +11,5 @@ export * from './contributionsScreen';
 export * from './myGroupsScreen';
 export * from './activityScreen';
 export * from './bankAccess';
+export * from './allmycontributions';
+export * from './allgrpconts';

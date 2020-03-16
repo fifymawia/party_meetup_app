@@ -8,10 +8,10 @@ const ContributionSchema = new Schema({
   //   required: true,
   //   minlength: [5, 'Title must be atleast 5 characters'],
   // },
-  // description: {
+  // amount: {
   //   type: String,
   //   required: true,
-  //   minlength: [10, 'Description must be atleast 10 characters'],
+  //   minlength: [1, 'Amount must be atleast 1 character'],
   // },
   members: {
     type: Array,

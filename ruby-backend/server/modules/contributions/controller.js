@@ -7,7 +7,7 @@ const Group = require('../groups/model');
 const createGroupContribution = async (req, res) => {
   const {
     // title,
-    // description,
+    // amount,
     members,
     groupId,
   } = req.body;
@@ -19,12 +19,12 @@ const createGroupContribution = async (req, res) => {
   // } else if (title.length < 5) {
   //   return res.status(400).json({ error: true, message: 'Title must be atleast 5 characters' });
   // }
-  // if (!description) {
-  //   return res.status(400).json({ error: true, message: 'Description must be provided' });
-  // } else if (typeof description !== 'string') {
-  //   return res.status(400).json({ error: true, message: 'Description must be a String' });
-  // } else if (description.length < 10) {
-  //   return res.status(400).json({ error: true, message: 'Description must be atleast 10 characters' });
+  // if (!amount) {
+  //   return res.status(400).json({ error: true, message: 'Amount must be provided' });
+  // } else if (typeof amount !== 'string') {
+  //   return res.status(400).json({ error: true, message: 'Amount must be a String' });
+  // } else if (amount.length < 1) {
+  //   return res.status(400).json({ error: true, message: 'Amount must be atleast 1 character' });
   // }
   if (!members) {
     return res.status(400).json({ error: true, message: 'Members must be provided' });
@@ -36,7 +36,7 @@ const createGroupContribution = async (req, res) => {
   if (!groupId) {
     return res.status(400).json({ error: true, message: 'GroupId must be provided' });
   }
-  // eslint-disable-next-line no-empty 
+  // eslint-disable-next-line no-empty
   const { members: groupMembers } = await Group.findById(groupId);
   const conMembers = members.filter(member => !groupMembers.includes(member));
 

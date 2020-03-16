@@ -6,6 +6,9 @@ import styles from './styles/HomeScreen';
 // import { } from '../../../constants/Apis';
 import { LoadingScreen } from '../../commons';
 import { Button, Card, CardItem, Icon } from 'native-base';
+const whiteicon = require(
+    '../../../assets/images/whiteicon.png'
+)
 
 
 // import AsyncStorage from '@react-native-community/async-storage';
@@ -73,6 +76,25 @@ class HomeScreen extends Component {
 
         }
 
+        FunctionToOpengrpconts = async () => {
+            // @TODO: onpress use token to get userId
+            const token = await retrieveToken();
+            if (token !== null) {
+                this.setState({ token });
+                console.log('>>> Login Token At Homescreen', token);
+                this.props.navigation.navigate('Groups');
+            } else{
+                Alert.alert('error saving');
+            }
+            //checks groups where user is admin
+
+
+            // fetches
+
+
+
+            }
+
     FunctionToOpenMyMyActivities = async () => {
 
                 this.props.navigation.navigate('Activities');
@@ -91,8 +113,9 @@ class HomeScreen extends Component {
         <View style={styles.root}>
 
          <View style={styles.topContainer}>
+         <Image style={{ width: '15%', height: '20%', position: 'absolute', marginTop: 10}} source={whiteicon} />
 
-          <Card style={{ alignSelf: 'center', marginTop: 200, width: 280 }}>
+          <Card style={{ alignSelf: 'center', marginTop: 100, width: 280 }}>
             <CardItem header button onPress={() => alert("You have an active session")}>
               <Text>Jace Copua</Text>
             </CardItem>
@@ -129,7 +152,16 @@ class HomeScreen extends Component {
               </Button>
           </View>
           <View>
-              <Button block light style={{ marginTop: 5 ,marginBottom:5, borderRadius: 20 }}
+              <Button block light style={{ marginTop: 5 ,borderRadius: 20 }}
+
+
+              onPress = { this.FunctionToOpengrpconts }
+              >
+                  <Text style={styles.buttonText}>All My Savings</Text>
+              </Button>
+          </View>
+          <View>
+              <Button block light style={{ marginTop: 5 ,marginBottom: 20, borderRadius: 20 }}
 
               onPress = { this.FunctionToOpenMyGroups }
               >

@@ -9,7 +9,7 @@ const createGroupMembers = async (req, res) => {
     phoneNumber,
     groupId,
   } = req.body;
-  // const { groupId } = req.params; 
+  // const { groupId } = req.params;
   if (!name) {
     return res.status(400).json({ error: true, message: 'Name must be provided' });
   } else if (typeof name !== 'string') {
@@ -44,4 +44,28 @@ const getAllMembers = async (req, res) => {
   }
 };
 
-module.exports = { createGroupMembers, getAllMembers };
+// get a member by id
+
+const getAmember = async (req, res) => {
+  const { memberId } = req.params;
+  if (!memberId) {
+    return res.status(400).json({ error: true, message: 'You need to provide the memberId' });
+  }
+  // search to see if group exists
+  const member = await Member.findById(memberId);
+  if (!member) {
+    return res.status(400).json({ error: true, message: 'This Member does not exist' });
+  }
+  // eslint-disable-next-line no-empty
+  try {
+    return res.status(200).json({
+      error: false,
+      member: await Member.findById(memberId).populate([
+        { path: 'members' },
+      ]) });
+  } catch (e) {
+    return res.status(400).json({ error: true, message: e.message });
+  }
+};
+
+module.exports = { createGroupMembers, getAllMembers, getAmember };

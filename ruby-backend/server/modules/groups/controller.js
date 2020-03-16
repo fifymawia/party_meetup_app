@@ -152,12 +152,8 @@ const getAsingleGroup = async (req, res) => {
   try {
     return res.status(200).json({
       error: false,
-      //  // members: await Member.find({ group: groupId }).populate('group', 'name') });
-      //  members: await Group.findById(groupId).populate([
-      //   { path: 'members', model: 'Member' },
-      // ]) });
 
-      groups: await Group.findById(groupId).populate([
+      group: await Group.findById(groupId).populate([
         { path: 'groups' },
       ]) });
   } catch (e) {
