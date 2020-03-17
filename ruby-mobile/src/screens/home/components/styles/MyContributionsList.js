@@ -18,7 +18,7 @@ const styles = EStyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    marginTop:25
+    marginTop:250
   },
   contributionCard: {
     // height: 200,
@@ -26,7 +26,7 @@ const styles = EStyleSheet.create({
     marginLeft: 5,
     marginRight: 5,
     backgroundColor: '$redColor',
-    flex: 1,
+    flex: 0.5,
   },
   contributionCardTop: {
     flex: 1,

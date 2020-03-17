@@ -13,6 +13,11 @@ const ContributionSchema = new Schema({
   //   required: true,
   //   minlength: [1, 'Amount must be atleast 1 character'],
   // },
+  verified: {
+    type: Boolean,
+    required: true,
+    default: false,
+  },
   members: {
     type: Array,
     required: true,

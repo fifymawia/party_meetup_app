@@ -55,7 +55,7 @@ const createGroupContribution = async (req, res) => {
   }
 };
 
-// get all contributions
+// get all Contributions
 const getAllContributions = async (req, res) => {
   try {
     return res.status(200).json({ contributions: await Contribution.find({}) });

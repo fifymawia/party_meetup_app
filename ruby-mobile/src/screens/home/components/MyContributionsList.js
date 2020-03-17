@@ -27,12 +27,12 @@ const MyContributionsList = ({ contributions }) => {
         );
     }
   // eslint-disable-next-line no-console
-//   console.log(contributions);
+  console.log(contributions);
   return (
     <View style={styles.root}>
       <View style={styles.titleContainer}>
       {/* if(contributions.lenghth === i+1) */}
-      {renderLastContribution()}
+      { contributions.length && renderLastContribution()}
 
 
       </View>

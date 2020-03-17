@@ -19,7 +19,7 @@ class allmycontributions extends Component {
 
         contributions: [],
       }
-        async componentDidMount() {
+        async componentWillMount() {
          console.log(this.props)
         const { params } = this.props.route;
          const groupId = params ? params.groupId : null;
