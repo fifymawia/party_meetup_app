@@ -18,6 +18,7 @@ const styles = EStyleSheet.create({
   },
   contentContainer: {
     flex: 1,
+    marginTop:25
   },
   contributionCard: {
     // height: 200,

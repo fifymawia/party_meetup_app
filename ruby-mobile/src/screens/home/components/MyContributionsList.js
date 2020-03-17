@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import styles from './styles/MyContributionsList';
+import {Card, CardItem } from 'native-base';
+import { contributionsScreen } from '../../contributionsScreen';
+
 
 const MyContributionsList = ({ contributions }) => {
   // eslint-disable-next-line no-console
@@ -8,33 +11,50 @@ const MyContributionsList = ({ contributions }) => {
   return (
     <View style={styles.root}>
       <View style={styles.titleContainer}>
-        <Text style={styles.title}> Group Conrtibutions</Text>
+      {/* if(contributions.lenghth === i+1) */}
+      {contributions.map((contribution, i) => (
+          <View key={i} >
+
+          <View>
+
+            <Card style={{ alignSelf: 'center', marginTop: 5, width: 280, height: 50 }}>
+            <CardItem header button onPress={() => alert("Pending Bank Verification")}>
+            <Text style={{color: '#008000', marginTop: 5, fontSize: 10, }}>
+                Not Verified
+            </Text>
+            <Text style={{marginTop: 20}}>
+              {contribution.createdAt}
+            </Text>
+              </CardItem>
+          </Card>
+
+          </View>
+        </View>
+      ))}
+
+
       </View>
       <View style={styles.contentContainer}>
+      <Text style={{fontSize: 20}}> All My Group Savings(swipe)</Text>
         <ScrollView horizontal>
           {contributions.map((contribution, i) => (
-  
+
             // eslint-disable-next-line react/no-array-index-key
+
             <View key={i} style={styles.contributionCard}>
-  
+
               <View style={styles.contributionCardTop}>
-  
-                <Text style={styles.contributionCardTitle}>
-                  {contribution.title}
+              <Text style={{color: '#008000', marginTop: 10, fontSize: 20, }}>
+                    Verified
                 </Text>
-              </View>
-              <View style={styles.contributionCardBottom}>
-                <Text style={styles.contributionCardMetaName}>
-                  {contribution.group.name}
-                </Text>
-                <Text style={styles.contributionCardDate}>
-                    oct 31 2019
+                <Text style={{marginTop: 30, color: '#ffffff' }}>
+                  {contribution.createdAt}
                 </Text>
               </View>
             </View>
           ))}
         </ScrollView>
-  
+
       </View>
     </View>
   );

@@ -9,7 +9,7 @@ const Home = createStackNavigator();
 
 export default function HomeNavigator() {
   return(
-    <Home.Navigator initialRouteName="Home">
+    <Home.Navigator initialRouteName="Credbook App">
          <Home.Screen
         name="Credbook App"
         component={landingScreen}>

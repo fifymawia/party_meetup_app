@@ -41,18 +41,13 @@ class allmycontributions extends Component {
       return (
         <View style={styles.root}>
 
-         <View style={styles.topContainer}>
+         <View style={{flex: 1 }}>
+         <View style={{ marginTop: '10%',  alignItems: 'center' }}>
+                    <Text style={{ fontSize: 15, color: '#BF2500' }}> Contributions with pending verification
+                </Text>
+                </View>
 
-          <View>
-              <Button block light style={{ marginTop: 5 ,marginBottom: 20, borderRadius: 20 }}
-
-              onPress = { this.FunctionToOpenMyGroups }
-              >
-                  <Text style={styles.buttonText}>Members Verification</Text>
-              </Button>
-          </View>
-
-          <View style={styles.bottomContainer}>
+          <View style={{flex: 1, marginTop: 10}}>
             <MyContributionsList contributions={this.state.contributions} />
           </View>
           </View>
