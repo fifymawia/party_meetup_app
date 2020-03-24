@@ -6,26 +6,26 @@ const Group = require('../groups/model');
 
 const createGroupContribution = async (req, res) => {
   const {
-    // title,
-    // amount,
+    title,
+    amount,
     members,
     groupId,
   } = req.body;
   // // const { groupId } = req.params;
-  // if (!title) {
-  //   return res.status(400).json({ error: true, message: 'Title must be provided' });
-  // } else if (typeof title !== 'string') {
-  //   return res.status(400).json({ error: true, message: 'Title must be a String' });
-  // } else if (title.length < 5) {
-  //   return res.status(400).json({ error: true, message: 'Title must be atleast 5 characters' });
-  // }
-  // if (!amount) {
-  //   return res.status(400).json({ error: true, message: 'Amount must be provided' });
-  // } else if (typeof amount !== 'string') {
-  //   return res.status(400).json({ error: true, message: 'Amount must be a String' });
-  // } else if (amount.length < 1) {
-  //   return res.status(400).json({ error: true, message: 'Amount must be atleast 1 character' });
-  // }
+  if (!title) {
+    return res.status(400).json({ error: true, message: 'Title must be provided' });
+  } else if (typeof title !== 'string') {
+    return res.status(400).json({ error: true, message: 'Title must be a String' });
+  } else if (title.length < 2) {
+    return res.status(400).json({ error: true, message: 'Title must be atleast 2 characters' });
+  }
+  if (!amount) {
+    return res.status(400).json({ error: true, message: 'Amount must be provided' });
+  } else if (typeof amount !== 'string') {
+    return res.status(400).json({ error: true, message: 'Amount must be a String' });
+  } else if (amount.length < 1) {
+    return res.status(400).json({ error: true, message: 'Amount must be atleast 1 character' });
+  }
   if (!members) {
     return res.status(400).json({ error: true, message: 'Members must be provided' });
   } else if (typeof members !== 'object') {
@@ -46,9 +46,10 @@ const createGroupContribution = async (req, res) => {
 
   try {
     const { contribution } = await Group.addContribution(groupId, {
-      // title,
-    // description,
-      members });
+      title,
+      amount,
+      members,
+    });
     return res.status(201).json({ error: false, contribution });
   } catch (e) {
     return res.status(400).json({ error: true, message: e.message });
@@ -80,7 +81,8 @@ const getContributionMembers = async (req, res) => {
       error: false,
       members: await Contribution.findById(contributionId).populate([
         { path: 'members', model: 'Member' },
-      ]) });
+      ]),
+    });
   } catch (e) {
     return res.status(400).json({ error: true, message: e.message });
   }
