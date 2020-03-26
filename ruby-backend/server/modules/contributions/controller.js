@@ -21,8 +21,8 @@ const createGroupContribution = async (req, res) => {
   }
   if (!amount) {
     return res.status(400).json({ error: true, message: 'Amount must be provided' });
-  } else if (typeof amount !== 'string') {
-    return res.status(400).json({ error: true, message: 'Amount must be a String' });
+  } else if (typeof amount !== 'number') {
+    return res.status(400).json({ error: true, message: 'Amount must be a number' });
   } else if (amount.length < 1) {
     return res.status(400).json({ error: true, message: 'Amount must be atleast 1 character' });
   }

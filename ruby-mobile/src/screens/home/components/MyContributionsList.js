@@ -6,28 +6,25 @@ import { contributionsScreen } from '../../contributionsScreen';
 
 
 const MyContributionsList = ({ contributions }) => {
-    const renderUnverifiedContributions = () => {
-        return contributions
-            .filter(contribution => !contribution.verified)
-            .map(contribution => {
-                return (
-                    <View>
+    const renderLastContribution = () => {
+        const lastIndex = contributions.length - 1;
+        const contribution = contributions[lastIndex];
+        return (
+            <View>
 
-                        <Card style={{ alignSelf: 'center', marginTop: 5, width: 280, height: 50 }}>
-                        <CardItem header button onPress={() => alert("Pending Bank Verification")}>
-                        <Text style={{color: '#008000', marginTop: 5, fontSize: 10, }}>
-                            Not Verified
-                        </Text>
-                        <Text style={{marginTop: 20}}>
-                            {contribution.createdAt}
-                        </Text>
-                            </CardItem>
-                        </Card>
+                <Card style={{ alignSelf: 'center', marginTop: 5, width: 280, height: 50 }}>
+                <CardItem header button onPress={() => alert("Pending Bank Verification")}>
+                <Text style={{color: '#008000', marginTop: 5, fontSize: 10, }}>
+                    Not Verified
+                </Text>
+                <Text style={{marginTop: 20}}>
+                    {contribution.createdAt}
+                </Text>
+                    </CardItem>
+                </Card>
 
-                    </View>
-                );
-            }
-            );
+            </View>
+        );
     }
   // eslint-disable-next-line no-console
   console.log(contributions);
@@ -35,7 +32,7 @@ const MyContributionsList = ({ contributions }) => {
     <View style={styles.root}>
       <View style={styles.titleContainer}>
       {/* if(contributions.lenghth === i+1) */}
-     <Text>{ contributions.length && renderUnverifiedContributions()}</Text>
+      { contributions.length && renderLastContribution()}
 
 
       </View>
@@ -53,8 +50,15 @@ const MyContributionsList = ({ contributions }) => {
                     Verified
                 </Text>
                 <Text style={{marginTop: 30, color: '#ffffff' }}>
+                  {contribution.title}
+                </Text>
+                <Text style={{marginTop: 30, color: '#ffffff' }}>
+                  {contribution.amount}
+                </Text>
+                <Text style={{marginTop: 30, color: '#ffffff' }}>
                   {contribution.createdAt}
                 </Text>
+
               </View>
             </View>
           ))}

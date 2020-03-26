@@ -15,6 +15,7 @@ export default class contributionsScreen extends ValidationComponent {
     static defaultProps = {
         getMembers,
     }
+    // @TODO add amount per member
     constructor(props) {
         super(props);
         this.onChangeTitle = this.onChangeTitle.bind(this);
@@ -164,10 +165,10 @@ export default class contributionsScreen extends ValidationComponent {
                                 // const chosenMembers = this.state.addpaidMembers.map(addpaidMember => addpaidMember.id);
                                 const addNewContribution = await addContribution(contributionObject);
                                 this.setState({
-                                 title: '',
-                                 amount: '',
-                                 members: '',
-                                 groupId: ''
+                                    title: '',
+                                    amount: '',
+                                    members: '',
+                                    groupId: ''
                                 });
                                 if (addNewContribution) {
                                     this.props.navigation.navigate('Home');

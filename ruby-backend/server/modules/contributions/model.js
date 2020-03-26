@@ -9,7 +9,7 @@ const ContributionSchema = new Schema({
     minlength: [2, 'Title must be atleast 2 characters'],
   },
   amount: {
-    type: String,
+    type: Number,
     required: true,
     minlength: [1, 'Amount must be atleast 1 character'],
   },

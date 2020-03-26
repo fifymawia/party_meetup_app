@@ -117,7 +117,7 @@ class HomeScreen extends Component {
 
           <Card style={{ alignSelf: 'center', marginTop: 100, width: 280 }}>
             <CardItem header button onPress={() => alert("You have an active session")}>
-              <Text>Jace Copua</Text>
+              <Text>Freda Mutune</Text>
             </CardItem>
             <CardItem footer button onPress={() => alert("Allow Credbook To Access Your Location")}>
               <Text>Update My Address</Text>
