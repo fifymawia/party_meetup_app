@@ -56,7 +56,7 @@ const getAmember = async (req, res) => {
   if (!member) {
     return res.status(400).json({ error: true, message: 'This Member does not exist' });
   }
-  // eslint-disable-next-line no-empty
+  // eslint-disable-next-line no-empty 
   try {
     return res.status(200).json({
       error: false,

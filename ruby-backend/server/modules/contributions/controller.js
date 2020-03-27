@@ -64,6 +64,29 @@ const getAllContributions = async (req, res) => {
     return res.status(e.status).json({ error: true, message: 'Error With Contributions' });
   }
 };
+// get a single contribution
+const getAsingleContribution = async (req, res) => {
+  const { contributionId } = req.params;
+  if (!contributionId) {
+    return res.status(400).json({ error: true, message: 'You need to provide the contribution id' });
+  }
+  // search to see if group exists
+  const contribution = await Contribution.findById(contributionId);
+  if (!contribution) {
+    return res.status(400).json({ error: true, message: 'This contribution does not exist' });
+  }
+  // eslint-disable-next-line no-empty
+  try {
+    return res.status(200).json({
+      error: false,
+
+      contribution: await Contribution.findById(contributionId).populate([
+        { path: 'contributions' },
+      ]) });
+  } catch (e) {
+    return res.status(400).json({ error: true, message: e.message });
+  }
+};
 
 const getContributionMembers = async (req, res) => {
   const { contributionId } = req.params;
@@ -90,6 +113,7 @@ const getContributionMembers = async (req, res) => {
 
 module.exports = {
   getAllContributions,
+  getAsingleContribution,
   createGroupContribution,
   getContributionMembers,
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 // import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createGroupScreen, addMembersScreen, signUpScreen, loginScreen, landingScreen, contributionsScreen,
-    bankAccess ,myGroupsScreen, activityScreen, allgrpconts, allmycontributions } from '../screens';
+    bankAccess ,myGroupsScreen, activityScreen, allgrpconts, allmycontributions, AppLoader } from '../screens';
 import { createStackNavigator } from '@react-navigation/stack';
 import TabNavigator from './TabNavigator';
 
@@ -9,10 +9,14 @@ const Home = createStackNavigator();
 
 export default function HomeNavigator() {
   return(
-    <Home.Navigator initialRouteName="Credbook App">
-         <Home.Screen
+    <Home.Navigator initialRouteName="App Loader">
+        <Home.Screen
         name="Credbook App"
         component={landingScreen}>
+      </Home.Screen>
+        <Home.Screen
+        name="App Loader"
+        component={AppLoader}>
       </Home.Screen>
       <Home.Screen
         name="Home"

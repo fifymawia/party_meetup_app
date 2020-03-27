@@ -24,6 +24,15 @@ const UserSchema = mongoose.Schema({
     unique: true,
     minlength: [10, 'Phone Number must be atleast 10 characters'],
   },
+  // active: {
+  //   type: Boolean,
+  //   required: true,
+  //   default: false,
+  // },
+  login: {
+    type: Boolean,
+    default: false,
+  },
   password: {
     type: String,
     required: true,

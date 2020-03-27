@@ -1,4 +1,4 @@
-
+// @TODO add an array of all the groups the member is in and make the member appear once.
 const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;

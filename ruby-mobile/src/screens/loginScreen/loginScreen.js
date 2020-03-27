@@ -68,7 +68,7 @@ class loginScreen extends ValidationComponent {
             console.log('>>> Login Token', loguser.token);
             // this.setState({ token })
 
-            this.props.navigation.navigate('Home', { name: loguser.firstName })
+            this.props.navigation.navigate('Home', { name: loguser.firstName, token: loguser.token })
         } else {
             if (loguser.message) {
                 Alert.alert(

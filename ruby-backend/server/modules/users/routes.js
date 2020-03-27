@@ -137,6 +137,8 @@ router.post(
         });
       }
 
+      await User.updateOne({phoneNumber}, {$set: {login: true}});
+
       const payload = {
         user: {
           id: user.id,
@@ -180,6 +182,50 @@ router.get('/me', authCheck, async (req, res) => {
     res.send({ message: e.message });
   }
 });
+
+/**
+ * @method - POST
+ * @description - Verify jwt token of user
+ * @param - /user/verify
+ */
+
+ router.post('/me/verify', async (req, res) => {
+   try{
+      // decode jwt token
+      const { token } = req.body;
+      const decoded = jwt.verify(token, 'secret');
+      if(decoded.user) {
+        if(decoded.exp !== Math.floor(Date.now() / 1000)){
+          const isUser = await User.findOne({_id: decoded.user.id});
+          if(isUser.login) {
+            // update jwt token && log use in
+            const payload = {
+              user: {
+                id: isUser.id,
+              },
+            };
+
+            jwt.sign(
+              payload,
+              'secret',
+              {
+                expiresIn: 3600,
+              },
+              (err, newToken) => {
+                if (err) throw err;
+                res.status(200).json({
+                  newToken,
+                  firstName: isUser.firstName,
+                });
+              }
+            );
+          }
+        }
+      }
+   }catch(e){
+     res.send({message: e.message});
+   }
+ });
 
 // get all groups where user is an admin
 router.get('/me/groups', authCheck, async (req, res) => {
