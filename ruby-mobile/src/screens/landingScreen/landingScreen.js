@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {AsyncStorage} from 'react-native';
+import { AppLoading, SplashScreen  } from 'expo';
 import axios from 'axios'
 import { login } from '../../../constants/Apis';
 import { View, Text, Image } from 'react-native';
@@ -20,12 +21,18 @@ export const saveToken = async token => {
 
 
 class landingScreen extends Component {
+    state = {
+        isReady: false,
+    };
 
-    componentDidMount(){
-        _retrieveData = async () => {
-            try {
-              const value = await AsyncStorage.getItem('token');
-              if (value !== null) {
+    componentDidMount() {
+        SplashScreen.preventAutoHide();
+    }
+
+    _retrieveData = async () => {
+        try {
+            const value = await AsyncStorage.getItem('token');
+            if (value !== null) {
                 // We have data!!
                 console.log('==stored data==', value);
                 // check if not expired
@@ -36,17 +43,20 @@ class landingScreen extends Component {
                     await saveToken(notExpired.data.newToken);
                     console.log('>>> Login Token', notExpired.data.newToken);
                     // this.setState({ token: notExpired.data.newToken })
+                    SplashScreen.hide();
                     this.props.navigation.navigate('Home', { name: notExpired.data.firstName, token: notExpired.data.newToken })
                 }
-              }
-            } catch (error) {
-              // Error retrieving data
-              console.log(error)
             }
-          };
 
-          _retrieveData();
-    }
+            return this.setState({ isReady: true });
+
+        } catch (error) {
+            // Error retrieving data
+            console.log(error)
+        }
+    };
+
+
 
     FunctionToOpenLoginActivity = () => {
         this.props.navigation.navigate('Login');
@@ -59,6 +69,16 @@ class landingScreen extends Component {
 
 
     render() {
+
+        if (!this.state.isReady) {
+            return (
+                <AppLoading
+                startAsync={this._retrieveData}
+                onFinish={() => SplashScreen.hide()}
+                onError={console.warn}
+                />
+            );
+        }
 
         return (
             <View style={{ marginTop: 30, flex: 1 }}>

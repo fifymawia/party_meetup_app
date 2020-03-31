@@ -12,7 +12,7 @@ const MyContributionsList = ({ contributions }) => {
         return (
             <View>
 
-                <Card style={{ alignSelf: 'center', marginTop: 5, width: 280, height: 50 }}>
+                <Card style={{ alignSelf: 'center',  width: 280, height: 50 }}>
                 <CardItem header button onPress={() => alert("Pending Bank Verification")}>
                 <Text style={{color: '#008000', marginTop: 5, fontSize: 10, }}>
                     Not Verified
@@ -46,13 +46,13 @@ const MyContributionsList = ({ contributions }) => {
             <View key={i} style={styles.contributionCard}>
 
               <View style={styles.contributionCardTop}>
-              <Text style={{color: '#008000', marginTop: 10, fontSize: 20, }}>
+              <Text style={{color: '#008000', marginTop: 5, fontSize: 20, }}>
                     Verified
                 </Text>
-                <Text style={{marginTop: 30, color: '#ffffff' }}>
+                <Text style={{marginTop: 10, color: '#ffffff' }}>
                   {contribution.title}
                 </Text>
-                <Text style={{marginTop: 30, color: '#ffffff' }}>
+                <Text style={{marginTop: 10, color: '#ffffff' }}>
                   {contribution.amount}
                 </Text>
                 <Text style={{marginTop: 30, color: '#ffffff' }}>

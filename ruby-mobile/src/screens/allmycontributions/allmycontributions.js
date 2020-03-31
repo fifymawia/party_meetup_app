@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text, Alert, Image } from 'react-native';
+import { View, Text, Alert, ImageBackground } from 'react-native';
 import  MyContributionsList  from '../home/components/MyContributionsList';
 import {  ContributionApi } from '../../../constants/Apis';
 import styles from '../home/styles/HomeScreen';
 import { LoadingScreen } from '../../commons';
 import { Button, Card, CardItem, Icon } from 'native-base';
+// const bdimg = require(
+//     '../../../assets/images/bdimg.png'
+// )
 
 const  contributionApi = new ContributionApi();
 
@@ -42,12 +45,16 @@ class allmycontributions extends Component {
         <View style={styles.root}>
 
          <View style={{flex: 1 }}>
-         <View style={{ marginTop: '10%',  alignItems: 'center' }}>
+
+            {/* <ImageBackground style={{ width: '100%', height: '100%', position: 'absolute'}} source={bdimg} /> */}
+
+
+         <View style={{ marginTop: '20%',  alignItems: 'center' }}>
                     <Text style={{ fontSize: 15, color: '#BF2500' }}> Contributions with pending verification
                 </Text>
                 </View>
 
-          <View style={{flex: 1, marginTop: 10}}>
+          <View style={{flex: 1, marginTop: 0}}>
             <MyContributionsList contributions={this.state.contributions} />
           </View>
           </View>

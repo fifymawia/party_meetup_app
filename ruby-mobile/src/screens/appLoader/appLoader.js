@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, Text, View } from 'react-native';
-import { AppLoading } from 'expo';
+import { AppLoading, SplashScreen } from 'expo';
 import {AsyncStorage} from 'react-native';
 import axios from 'axios'
 const mySplash = require(
@@ -29,7 +29,8 @@ export default class AppLoader extends React.Component {
           onFinish={() => this.setState({ isReady: true })}
           onError={console.warn}
         />
-      ); }
+      );
+    }
 
     return (
       <View style={{ flex: 1 }}>

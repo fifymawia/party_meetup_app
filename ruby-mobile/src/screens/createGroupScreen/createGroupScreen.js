@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, ScrollView, TouchableOpacity } from 'react-native';
 import { Form, Item, Picker, Button } from 'native-base';
 import DatePicker from 'react-native-datepicker';
 import ValidationComponent from 'react-native-form-validator';
 import { createGroup } from '../../../constants/Apis';
+import Styles  from './styles/createGroupScreen';
 
 
 
@@ -92,46 +93,39 @@ class createGroupScreen extends ValidationComponent {
 
     render() {
         return (
-            <View>
-                <View style={{ marginTop: 20, alignItems: 'center' }}>
-                    <Text style={{ fontSize: 20 ,color:'#BF2500'}} >Group Setup Info
-                </Text>
-                </View>
-                <View style={{ marginTop: 20 }}>
+            <ScrollView>
+            <View style={Styles.root}>
+                    <Text style={Styles.headerText} >Group Setup Info</Text>
 
-                    <Form>
-                        <Item>
-                            <TextInput placeholder="Enter Group Name" value={this.state.name} onChangeText={this.onChangename} style={{ marginTop: 20, width: '100%' }}/>
+                <View>
+
+                    <Form style={Styles.form}>
+                        <Item style={Styles.textInput}>
+                            <TextInput placeholder="Enter Group Name" value={this.state.name} onChangeText={this.onChangename} />
                             {this.getErrorsInField('name').map(errorMessage => <Text>{errorMessage}</Text>)}
 
 
                         </Item>
-                        <Item >
-                            <TextInput placeholder="Enter Group Description" value={this.state.description} onChangeText={this.onChangedescription} style={{ marginTop: 20 , width: '100%'}} />
+                        <Item style={Styles.textInput} >
+                            <TextInput style={{left: 0}} placeholder="Enter Group Description" value={this.state.description} onChangeText={this.onChangedescription}  />
                             {this.getErrorsInField('description').map(errorMessage => <Text>{errorMessage}</Text>)}
 
                         </Item>
-                        <Item last>
-                            <TextInput placeholder="Enter Group Account Number" value={this.state.bankAccount} onChangeText={this.onChangebankAccount}style={{ marginTop: 20, width: '100%' }} />
+                        <Item style={Styles.textInput}>
+                            <TextInput placeholder="Enter Group Account Number" value={this.state.bankAccount} onChangeText={this.onChangebankAccount}  />
                             {this.getErrorsInField('bankAccount').map(errorMessage => <Text>{errorMessage}</Text>)}
 
                         </Item>
                         <View>
-                            <Text style={{ marginTop: 30, marginLeft: 60, fontSize: 20 ,color:'#BF2500'}}>Select Contribution Frequency
-                </Text>
-
+                            <Text style={Styles.headerText}>Select Contribution Frequency</Text>
                         </View>
-                        <Item picker>
+                        <Item style={Styles.textInput} picker>
                             <Picker
                                 mode="dropdown"
-                                style={{ width: undefined }}
                                 placeholder="Select your"
-                                placeholderStyle={{ color: "#bfc6ea" }}
                                 placeholderIconColor="#007aff"
                                 selectedValue={this.state.frequency}
-                                style={{ marginTop: 10 }}
                                 onValueChange={this.onValueChange2.bind(this)}
-
                             >
                                 <Picker.Item label="Daily" value="Daily" />
                                 <Picker.Item label="Weekly" value="Weekly" />
@@ -139,22 +133,20 @@ class createGroupScreen extends ValidationComponent {
                                 <Picker.Item label="Monthly" value="Monthly" />
                             </Picker>
                         </Item>
-                        <Item style={{ marginTop: 15 }}>
-                            <TextInput placeholder="Amount Per Contribution" value={this.state.amount} onChangeText={this.onChangeamount} style={{ width: '100%', marginTop: 20 }} />
+                        <Item style={Styles.textInput}>
+                            <TextInput placeholder="Amount Per Contribution" value={this.state.amount} onChangeText={this.onChangeamount}  />
                             {this.getErrorsInField('amount').map(errorMessage => <Text>{errorMessage}</Text>)}
 
                         </Item>
                         <View>
-                            <Text style={{ marginTop: 15, marginLeft: 60, fontSize: 20,color:'#BF2500' }}>Select Proposed Start Date
-                </Text>
+                            <Text style={Styles.headerText}>Select Proposed Start Date</Text>
                         </View>
 
                         <DatePicker
-                            style={{ width: 200 }}
-                            style={{ marginTop: 15, marginLeft: 80 }}
+                            style={{width: 300}}
                             date={this.state.proposedDate}
                             mode="date"
-                            placeholder="select date"
+                            placeholder="Select date"
                             format="YYYY-MM-DD"
                             minDate={new Date()}
                             maxDate="2020-06-21"
@@ -168,7 +160,8 @@ class createGroupScreen extends ValidationComponent {
                                     marginLeft: 0
                                 },
                                 dateInput: {
-                                    marginLeft: 36
+                                   width: '100%',
+                                   borderStyle: 'dashed'
                                 }
                                 // ... You can check the source to find the other keys.
                             }}
@@ -176,18 +169,21 @@ class createGroupScreen extends ValidationComponent {
                         />
 
                         <View >
+                            <TouchableOpacity>
                             <Button block danger
-                                style={{ marginTop: 30, borderRadius: 20, width: '100%' }}
+                                style={{ marginTop: 30, borderRadius: 10, width: '100%' }}
                                 onPress={this.FunctionToOpenMembersActivity}
                             >
-                                <Text>Next</Text>
+                                <Text style={Styles.headerText}>Next</Text>
                             </Button>
+                            </TouchableOpacity>
                         </View>
                     </Form>
 
 
                 </View>
             </View>
+            </ScrollView>
         );
     }
 

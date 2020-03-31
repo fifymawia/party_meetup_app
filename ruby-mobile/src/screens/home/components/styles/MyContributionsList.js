@@ -6,7 +6,8 @@ const styles = EStyleSheet.create({
 
   },
   titleContainer: {
-    //flex: 1,
+    flex: 1,
+    marginTop: 70,
     paddingHorizontal: '2.5%',
     // paddingVertical: '2.5%',
 
@@ -18,7 +19,7 @@ const styles = EStyleSheet.create({
   },
   contentContainer: {
     flex: 1,
-    marginTop:250
+    marginTop:100
   },
   contributionCard: {
     // height: 200,

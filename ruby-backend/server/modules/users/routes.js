@@ -236,7 +236,5 @@ router.get('/me/groups', authCheck, async (req, res) => {
     res.send({ message: e.message });
   }
 });
-// routes.post('/groups/:groupId/contributions/new', UsersController.createGroupContribution);
-// routes.get('/groups/:groupId/contributions', UsersController.getGroupContributions);
 
 module.exports = router;
