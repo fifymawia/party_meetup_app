@@ -37,6 +37,7 @@ import { addMembers } from '../../../constants/Apis';
         if (status === 'granted') {
             const { data } = await Contacts.getContactsAsync({
             fields: [Contacts.Fields.Emails, Contacts.Fields.PhoneNumbers],
+            pageSize: 15,
             });
 
             if (data.length > 0) {
@@ -68,7 +69,7 @@ console.log(route);
         justifyContent: 'center',
       }}>
       <ScrollView>
-        <Text>Contacts Module Example</Text>
+        <Text>Select members from contact list</Text>
         <Content>
             {contacts.map(contact => (
                 <ListItem key={contact.id}>
